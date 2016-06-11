@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>States</string>
 	<key>CFBundleIdentifier</key>
-	<string>exposed.internals.states-for-sketch</string>
+	<string>com.edenvidal.states-for-sketch</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
