@@ -278,7 +278,7 @@
 			dependencies = (
 			);
 			name = States;
-			productName = Statum;
+			productName = States;
 			productReference = 0A3CE5971CFCBB6800B8C552 /* States.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -463,7 +463,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = States/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "exposed.internals.states-for-sketch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.edenvidal.states-for-sketch";
 				PRODUCT_NAME = States;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
@@ -477,7 +477,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = States/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "exposed.internals.states-for-sketch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.edenvidal.states-for-sketch";
 				PRODUCT_NAME = States;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;

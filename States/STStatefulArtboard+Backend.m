@@ -8,10 +8,10 @@
 
 #import "STStatefulArtboard+Backend.h"
 
-static NSString const *const kSTStatefulArtboardStatesKey       = @"x-statum-states";
-static NSString const *const kSTStatefulArtboardStateValuesKey  = @"x-statum-state-values";
-static NSString const *const kSTStatefulArtboardCurrentStateKey = @"x-statum-current-state";
-static NSString const *const kSTStatefulArtboardDefaultStateKey = @"x-statum-default-state";
+static NSString const *const kSTStatefulArtboardStatesKey       = @"x-states-states";
+static NSString const *const kSTStatefulArtboardStateValuesKey  = @"x-states-state-values";
+static NSString const *const kSTStatefulArtboardCurrentStateKey = @"x-states-current-state";
+static NSString const *const kSTStatefulArtboardDefaultStateKey = @"x-states-default-state";
 
 @implementation STStatefulArtboard (Backend)
 

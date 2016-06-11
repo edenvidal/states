@@ -4,7 +4,7 @@
 	"author": "Eden Vidal",
 	"homepage": "http://edenvidal.com",
 	"version": 0.92,
-	"identifier": "exposed.internals.statum-for-sketch",
+	"identifier": "com.edenvidal.states-for-sketch",
 	"compatibleVersion": 3,
 	"bundleVersion": 1,
 	"commands": [{
