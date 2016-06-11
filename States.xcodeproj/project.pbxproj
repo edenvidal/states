@@ -1,0 +1,511 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A2C50EA1D09C87800CB3C9F /* STWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2C50E91D09C87800CB3C9F /* STWindow.m */; };
+		0A3CBDB31D0A61C40016EFD8 /* STTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CBDB21D0A61C40016EFD8 /* STTableRowView.m */; };
+		0A3CBDB61D0A6BB10016EFD8 /* STColorFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CBDB51D0A6BB10016EFD8 /* STColorFactory.m */; };
+		0A3CEE731D055B6F008A4BB0 /* StatesController+Naming.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CEE721D055B6F008A4BB0 /* StatesController+Naming.m */; };
+		0A3CEE761D055C5E008A4BB0 /* StatesController+Decisions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CEE751D055C5E008A4BB0 /* StatesController+Decisions.m */; };
+		0A3CEE791D05693E008A4BB0 /* StatesController+ContextMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CEE781D05693E008A4BB0 /* StatesController+ContextMenu.m */; };
+		0A4BDCAE1CFEBDC600D3584F /* STSketch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BDCAD1CFEBDC600D3584F /* STSketch.m */; };
+		0A4BDCB61CFEC5C200D3584F /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BDCB51CFEC5C200D3584F /* Aspects.m */; };
+		0A4BDCBA1CFED17200D3584F /* STSketchPluginContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4BDCB91CFED17200D3584F /* STSketchPluginContext.m */; };
+		0A7160F31D09279C008A3F78 /* STUpdateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7160F21D09279C008A3F78 /* STUpdateButton.m */; };
+		0A9BE3C61D06F89E00257F99 /* dirty.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9BE3C41D06F89E00257F99 /* dirty.png */; };
+		0A9BE3C71D06F89E00257F99 /* dirty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9BE3C51D06F89E00257F99 /* dirty@2x.png */; };
+		0A9C85941D0B001B00231073 /* STPlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9C85931D0B001B00231073 /* STPlaceholderView.m */; };
+		0A9CBE3E1D09D8C700748DFA /* STTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CBE3D1D09D8C700748DFA /* STTableCellView.m */; };
+		0A9CBE411D09DEFB00748DFA /* STHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9CBE401D09DEFB00748DFA /* STHeaderView.m */; };
+		0AAB1C541CFF33C8006512AF /* STLayerState.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB1C531CFF33C8006512AF /* STLayerState.m */; };
+		0AAB1C5B1CFF3D56006512AF /* STStateDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB1C5A1CFF3D56006512AF /* STStateDescription.m */; };
+		0AAB1C5E1CFF40CA006512AF /* STStatefulArtboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAB1C5D1CFF40CA006512AF /* STStatefulArtboard.m */; };
+		0AB737AC1D04512600E79D3D /* STTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB737AB1D04512600E79D3D /* STTableView.m */; };
+		0AC4CD911D0BDDD000829E45 /* STTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4CD901D0BDDD000829E45 /* STTextField.m */; };
+		0AC4CD941D0BE52300829E45 /* NSArray+HigherOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4CD931D0BE52300829E45 /* NSArray+HigherOrder.m */; };
+		0AD7BE051CFDE548003C77BB /* StatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7BE041CFDE548003C77BB /* StatesController.m */; };
+		0AD7BE0B1CFDF088003C77BB /* StatesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD7BE0A1CFDF088003C77BB /* StatesWindow.xib */; };
+		0AE8BF421D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8BF411D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A2C50E81D09C87800CB3C9F /* STWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWindow.h; sourceTree = "<group>"; };
+		0A2C50E91D09C87800CB3C9F /* STWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWindow.m; sourceTree = "<group>"; };
+		0A3CBDB11D0A61C40016EFD8 /* STTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTableRowView.h; sourceTree = "<group>"; };
+		0A3CBDB21D0A61C40016EFD8 /* STTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTableRowView.m; sourceTree = "<group>"; };
+		0A3CBDB41D0A6BB10016EFD8 /* STColorFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STColorFactory.h; sourceTree = "<group>"; };
+		0A3CBDB51D0A6BB10016EFD8 /* STColorFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STColorFactory.m; sourceTree = "<group>"; };
+		0A3CE5971CFCBB6800B8C552 /* States.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = States.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A3CE59A1CFCBB6800B8C552 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A3CE5A01CFCBBCD00B8C552 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		0A3CEE711D055B6F008A4BB0 /* StatesController+Naming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "StatesController+Naming.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0A3CEE721D055B6F008A4BB0 /* StatesController+Naming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "StatesController+Naming.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0A3CEE741D055C5E008A4BB0 /* StatesController+Decisions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "StatesController+Decisions.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0A3CEE751D055C5E008A4BB0 /* StatesController+Decisions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "StatesController+Decisions.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0A3CEE771D05693E008A4BB0 /* StatesController+ContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "StatesController+ContextMenu.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0A3CEE781D05693E008A4BB0 /* StatesController+ContextMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "StatesController+ContextMenu.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0A4BDCAC1CFEBDC600D3584F /* STSketch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSketch.h; sourceTree = "<group>"; };
+		0A4BDCAD1CFEBDC600D3584F /* STSketch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSketch.m; sourceTree = "<group>"; };
+		0A4BDCB41CFEC5C200D3584F /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Aspects.h; path = vendor/Aspects.h; sourceTree = "<group>"; };
+		0A4BDCB51CFEC5C200D3584F /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Aspects.m; path = vendor/Aspects.m; sourceTree = "<group>"; };
+		0A4BDCB81CFED17200D3584F /* STSketchPluginContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STSketchPluginContext.h; sourceTree = "<group>"; };
+		0A4BDCB91CFED17200D3584F /* STSketchPluginContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STSketchPluginContext.m; sourceTree = "<group>"; };
+		0A7160F11D09279C008A3F78 /* STUpdateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STUpdateButton.h; sourceTree = "<group>"; };
+		0A7160F21D09279C008A3F78 /* STUpdateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STUpdateButton.m; sourceTree = "<group>"; };
+		0A7E78FF1CFED94800CAB318 /* runtime.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = runtime.js; path = lib/runtime.js; sourceTree = "<group>"; };
+		0A9BE3C41D06F89E00257F99 /* dirty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirty.png; sourceTree = "<group>"; };
+		0A9BE3C51D06F89E00257F99 /* dirty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirty@2x.png"; sourceTree = "<group>"; };
+		0A9C85921D0B001B00231073 /* STPlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPlaceholderView.h; sourceTree = "<group>"; };
+		0A9C85931D0B001B00231073 /* STPlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPlaceholderView.m; sourceTree = "<group>"; };
+		0A9CBE3C1D09D8C700748DFA /* STTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTableCellView.h; sourceTree = "<group>"; };
+		0A9CBE3D1D09D8C700748DFA /* STTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTableCellView.m; sourceTree = "<group>"; };
+		0A9CBE3F1D09DEFB00748DFA /* STHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHeaderView.h; sourceTree = "<group>"; };
+		0A9CBE401D09DEFB00748DFA /* STHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHeaderView.m; sourceTree = "<group>"; };
+		0AAB1C4A1CFF2FEB006512AF /* STPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPage.h; sourceTree = "<group>"; };
+		0AAB1C4B1CFF2FF6006512AF /* STDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STDocument.h; sourceTree = "<group>"; };
+		0AAB1C4C1CFF2FFE006512AF /* STLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLayer.h; sourceTree = "<group>"; };
+		0AAB1C4D1CFF3006006512AF /* STArtboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STArtboard.h; sourceTree = "<group>"; };
+		0AAB1C501CFF3217006512AF /* STCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STCommand.h; sourceTree = "<group>"; };
+		0AAB1C521CFF33C8006512AF /* STLayerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLayerState.h; sourceTree = "<group>"; };
+		0AAB1C531CFF33C8006512AF /* STLayerState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLayerState.m; sourceTree = "<group>"; };
+		0AAB1C591CFF3D56006512AF /* STStateDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStateDescription.h; sourceTree = "<group>"; };
+		0AAB1C5A1CFF3D56006512AF /* STStateDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStateDescription.m; sourceTree = "<group>"; };
+		0AAB1C5C1CFF40CA006512AF /* STStatefulArtboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStatefulArtboard.h; sourceTree = "<group>"; };
+		0AAB1C5D1CFF40CA006512AF /* STStatefulArtboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStatefulArtboard.m; sourceTree = "<group>"; };
+		0AB737AA1D04512600E79D3D /* STTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTableView.h; sourceTree = "<group>"; };
+		0AB737AB1D04512600E79D3D /* STTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTableView.m; sourceTree = "<group>"; };
+		0AC4CD8F1D0BDDD000829E45 /* STTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTextField.h; sourceTree = "<group>"; };
+		0AC4CD901D0BDDD000829E45 /* STTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTextField.m; sourceTree = "<group>"; };
+		0AC4CD921D0BE52300829E45 /* NSArray+HigherOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HigherOrder.h"; sourceTree = "<group>"; };
+		0AC4CD931D0BE52300829E45 /* NSArray+HigherOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HigherOrder.m"; sourceTree = "<group>"; };
+		0AD7BE031CFDE548003C77BB /* StatesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = StatesController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0AD7BE041CFDE548003C77BB /* StatesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StatesController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0AD7BE081CFDE680003C77BB /* plugin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; lineEnding = 0; path = plugin.js; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		0AD7BE0A1CFDF088003C77BB /* StatesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatesWindow.xib; sourceTree = "<group>"; };
+		0AE8BF401D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STStatefulArtboard+Backend.h"; sourceTree = "<group>"; };
+		0AE8BF411D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STStatefulArtboard+Backend.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0A3CE5941CFCBB6800B8C552 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0A3CE58E1CFCBB6800B8C552 = {
+			isa = PBXGroup;
+			children = (
+				0A3CE5A01CFCBBCD00B8C552 /* manifest.json */,
+				0AD7BE071CFDE658003C77BB /* JS */,
+				0A3CE5991CFCBB6800B8C552 /* Native Code */,
+				0AE8BF431D030E7C00E0C4A8 /* Helpers */,
+				0A9BE3C31D06F89E00257F99 /* Images */,
+				0A4BDCB01CFEC37000D3584F /* Vendor */,
+				0A3CE5981CFCBB6800B8C552 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0A3CE5981CFCBB6800B8C552 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A3CE5971CFCBB6800B8C552 /* States.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0A3CE5991CFCBB6800B8C552 /* Native Code */ = {
+			isa = PBXGroup;
+			children = (
+				0A3CE59A1CFCBB6800B8C552 /* Info.plist */,
+				0A3CBDB41D0A6BB10016EFD8 /* STColorFactory.h */,
+				0A3CBDB51D0A6BB10016EFD8 /* STColorFactory.m */,
+				0AAB1C5F1CFF4AE8006512AF /* Controller */,
+				0A7160F41D0927A5008A3F78 /* Views */,
+				0A3CEE7A1D0569DF008A4BB0 /* Artboards */,
+				0AAB1C511CFF33B8006512AF /* Wrappers */,
+				0AAB1C4E1CFF31C1006512AF /* Sketch Protocols */,
+			);
+			name = "Native Code";
+			path = States;
+			sourceTree = "<group>";
+		};
+		0A3CEE7A1D0569DF008A4BB0 /* Artboards */ = {
+			isa = PBXGroup;
+			children = (
+				0AAB1C5C1CFF40CA006512AF /* STStatefulArtboard.h */,
+				0AAB1C5D1CFF40CA006512AF /* STStatefulArtboard.m */,
+				0AE8BF401D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.h */,
+				0AE8BF411D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m */,
+			);
+			name = Artboards;
+			sourceTree = "<group>";
+		};
+		0A4BDCB01CFEC37000D3584F /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BDCB41CFEC5C200D3584F /* Aspects.h */,
+				0A4BDCB51CFEC5C200D3584F /* Aspects.m */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		0A7160F41D0927A5008A3F78 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A7160F11D09279C008A3F78 /* STUpdateButton.h */,
+				0A7160F21D09279C008A3F78 /* STUpdateButton.m */,
+				0AB737AA1D04512600E79D3D /* STTableView.h */,
+				0AB737AB1D04512600E79D3D /* STTableView.m */,
+				0A9CBE3C1D09D8C700748DFA /* STTableCellView.h */,
+				0A9CBE3D1D09D8C700748DFA /* STTableCellView.m */,
+				0AC4CD8F1D0BDDD000829E45 /* STTextField.h */,
+				0AC4CD901D0BDDD000829E45 /* STTextField.m */,
+				0A3CBDB11D0A61C40016EFD8 /* STTableRowView.h */,
+				0A3CBDB21D0A61C40016EFD8 /* STTableRowView.m */,
+				0A2C50E81D09C87800CB3C9F /* STWindow.h */,
+				0A2C50E91D09C87800CB3C9F /* STWindow.m */,
+				0A9CBE3F1D09DEFB00748DFA /* STHeaderView.h */,
+				0A9CBE401D09DEFB00748DFA /* STHeaderView.m */,
+				0A9C85921D0B001B00231073 /* STPlaceholderView.h */,
+				0A9C85931D0B001B00231073 /* STPlaceholderView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0A7E79001CFEDA1500CAB318 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				0A7E78FF1CFED94800CAB318 /* runtime.js */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		0A9BE3C31D06F89E00257F99 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0A9BE3C41D06F89E00257F99 /* dirty.png */,
+				0A9BE3C51D06F89E00257F99 /* dirty@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		0AAB1C4E1CFF31C1006512AF /* Sketch Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0AAB1C4A1CFF2FEB006512AF /* STPage.h */,
+				0AAB1C4B1CFF2FF6006512AF /* STDocument.h */,
+				0AAB1C4C1CFF2FFE006512AF /* STLayer.h */,
+				0AAB1C4D1CFF3006006512AF /* STArtboard.h */,
+				0AAB1C501CFF3217006512AF /* STCommand.h */,
+			);
+			name = "Sketch Protocols";
+			sourceTree = "<group>";
+		};
+		0AAB1C511CFF33B8006512AF /* Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				0A4BDCAC1CFEBDC600D3584F /* STSketch.h */,
+				0A4BDCAD1CFEBDC600D3584F /* STSketch.m */,
+				0AAB1C521CFF33C8006512AF /* STLayerState.h */,
+				0AAB1C531CFF33C8006512AF /* STLayerState.m */,
+				0AAB1C591CFF3D56006512AF /* STStateDescription.h */,
+				0AAB1C5A1CFF3D56006512AF /* STStateDescription.m */,
+				0A4BDCB81CFED17200D3584F /* STSketchPluginContext.h */,
+				0A4BDCB91CFED17200D3584F /* STSketchPluginContext.m */,
+			);
+			name = Wrappers;
+			sourceTree = "<group>";
+		};
+		0AAB1C5F1CFF4AE8006512AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7BE0A1CFDF088003C77BB /* StatesWindow.xib */,
+				0AD7BE031CFDE548003C77BB /* StatesController.h */,
+				0AD7BE041CFDE548003C77BB /* StatesController.m */,
+				0A3CEE711D055B6F008A4BB0 /* StatesController+Naming.h */,
+				0A3CEE721D055B6F008A4BB0 /* StatesController+Naming.m */,
+				0A3CEE741D055C5E008A4BB0 /* StatesController+Decisions.h */,
+				0A3CEE751D055C5E008A4BB0 /* StatesController+Decisions.m */,
+				0A3CEE771D05693E008A4BB0 /* StatesController+ContextMenu.h */,
+				0A3CEE781D05693E008A4BB0 /* StatesController+ContextMenu.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		0AD7BE071CFDE658003C77BB /* JS */ = {
+			isa = PBXGroup;
+			children = (
+				0AD7BE081CFDE680003C77BB /* plugin.js */,
+				0A7E79001CFEDA1500CAB318 /* lib */,
+			);
+			name = JS;
+			sourceTree = "<group>";
+		};
+		0AE8BF431D030E7C00E0C4A8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0AC4CD921D0BE52300829E45 /* NSArray+HigherOrder.h */,
+				0AC4CD931D0BE52300829E45 /* NSArray+HigherOrder.m */,
+			);
+			name = Helpers;
+			path = States;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0A3CE5961CFCBB6800B8C552 /* States */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A3CE59D1CFCBB6800B8C552 /* Build configuration list for PBXNativeTarget "States" */;
+			buildPhases = (
+				0A3CE5931CFCBB6800B8C552 /* Sources */,
+				0A3CE5941CFCBB6800B8C552 /* Frameworks */,
+				0A3CE5951CFCBB6800B8C552 /* Resources */,
+				0AD7BE061CFDE5A2003C77BB /* Build Sketch plugin */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = States;
+			productName = Statum;
+			productReference = 0A3CE5971CFCBB6800B8C552 /* States.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A3CE58F1CFCBB6800B8C552 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Internals Exposed";
+				TargetAttributes = {
+					0A3CE5961CFCBB6800B8C552 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 0A3CE5921CFCBB6800B8C552 /* Build configuration list for PBXProject "States" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0A3CE58E1CFCBB6800B8C552;
+			productRefGroup = 0A3CE5981CFCBB6800B8C552 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0A3CE5961CFCBB6800B8C552 /* States */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0A3CE5951CFCBB6800B8C552 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A9BE3C71D06F89E00257F99 /* dirty@2x.png in Resources */,
+				0A9BE3C61D06F89E00257F99 /* dirty.png in Resources */,
+				0AD7BE0B1CFDF088003C77BB /* StatesWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0AD7BE061CFDE5A2003C77BB /* Build Sketch plugin */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Sketch plugin";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PLUGIN_DIR=\"$BUILT_PRODUCTS_DIR/$PROJECT_NAME\".sketchplugin\n# 1) create a .sketchplugin directory with the following subdirs:\n#    ./Contents/Sketch\n#    ./Contents/Sketch/lib\n#    ./Contents/Resources\nrm -Rf \"$PLUGIN_DIR\"\nmkdir \"$PLUGIN_DIR\" && cd $_\nmkdir ./Contents && cd $_\nmkdir -p ./Sketch/lib\nmkdir ./Resources\n# 2) copy files into .sketchplugin:\n#    ./Contents/Sketch/manifest.json\n#    ./Contents/Sketch/*.js\n#    ./Contents/Sketch/lib/*.js\n#    ./Contents/Resources/States.bundle\ncp \"$PROJECT_DIR/manifest.json\" ./Sketch\ncp \"$PROJECT_DIR/\"*.js ./Sketch\ncp \"$PROJECT_DIR/lib/\"*.js ./Sketch/lib\ncp -R \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" ./Resources\n# 3) Symlink our target into Sketch's Plugins directory\ncd ~/Library/Application\\ Support/com.bohemiancoding.sketch3/Plugins\nrm -f \"$EXECUTABLE_NAME\".sketchplugin\nln -s \"$PLUGIN_DIR\" \"$EXECUTABLE_NAME\".sketchplugin\n# 4) Done! 🎉";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0A3CE5931CFCBB6800B8C552 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AD7BE051CFDE548003C77BB /* StatesController.m in Sources */,
+				0A3CEE761D055C5E008A4BB0 /* StatesController+Decisions.m in Sources */,
+				0AC4CD911D0BDDD000829E45 /* STTextField.m in Sources */,
+				0AAB1C541CFF33C8006512AF /* STLayerState.m in Sources */,
+				0A4BDCAE1CFEBDC600D3584F /* STSketch.m in Sources */,
+				0A9CBE411D09DEFB00748DFA /* STHeaderView.m in Sources */,
+				0A3CBDB61D0A6BB10016EFD8 /* STColorFactory.m in Sources */,
+				0A3CEE731D055B6F008A4BB0 /* StatesController+Naming.m in Sources */,
+				0A3CEE791D05693E008A4BB0 /* StatesController+ContextMenu.m in Sources */,
+				0AC4CD941D0BE52300829E45 /* NSArray+HigherOrder.m in Sources */,
+				0A9CBE3E1D09D8C700748DFA /* STTableCellView.m in Sources */,
+				0AAB1C5B1CFF3D56006512AF /* STStateDescription.m in Sources */,
+				0AE8BF421D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m in Sources */,
+				0AAB1C5E1CFF40CA006512AF /* STStatefulArtboard.m in Sources */,
+				0A4BDCBA1CFED17200D3584F /* STSketchPluginContext.m in Sources */,
+				0AB737AC1D04512600E79D3D /* STTableView.m in Sources */,
+				0A9C85941D0B001B00231073 /* STPlaceholderView.m in Sources */,
+				0A7160F31D09279C008A3F78 /* STUpdateButton.m in Sources */,
+				0A4BDCB61CFEC5C200D3584F /* Aspects.m in Sources */,
+				0A2C50EA1D09C87800CB3C9F /* STWindow.m in Sources */,
+				0A3CBDB31D0A61C40016EFD8 /* STTableRowView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0A3CE59B1CFCBB6800B8C552 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0A3CE59C1CFCBB6800B8C552 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0A3CE59E1CFCBB6800B8C552 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Dmitry Rodionov (C6QG5C28K7)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = States/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "exposed.internals.states-for-sketch";
+				PRODUCT_NAME = States;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		0A3CE59F1CFCBB6800B8C552 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Dmitry Rodionov (C6QG5C28K7)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = States/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = "exposed.internals.states-for-sketch";
+				PRODUCT_NAME = States;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0A3CE5921CFCBB6800B8C552 /* Build configuration list for PBXProject "States" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A3CE59B1CFCBB6800B8C552 /* Debug */,
+				0A3CE59C1CFCBB6800B8C552 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A3CE59D1CFCBB6800B8C552 /* Build configuration list for PBXNativeTarget "States" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A3CE59E1CFCBB6800B8C552 /* Debug */,
+				0A3CE59F1CFCBB6800B8C552 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0A3CE58F1CFCBB6800B8C552 /* Project object */;
+}

@@ -1,0 +1,20 @@
+{
+	"name": "States",
+	"description": "A plugin which saves and applies layer states to create different compositions of current artboard",
+	"author": "Dmitry Rodionov",
+	"homepage": "XXX",
+	"version": 0.92,
+	"identifier": "exposed.internals.statum-for-sketch",
+	"compatibleVersion": 3,
+	"bundleVersion": 1,
+	"commands": [{
+		"name": "Show States of Artboard",
+		"identifier": "show-states",
+		"script": "plugin.js",
+		"handler": "showStatesWindow"
+		}],
+	"menu": {
+		"items": ["show-states"],
+		"isRoot": true
+	}
+}
