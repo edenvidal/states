@@ -22,6 +22,12 @@
 
 + (NSColor *)tableViewBackgroundColor;
 
++ (NSColor *)tableViewCellTextRegularColor;
+
++ (NSColor *)tableViewCellTextSelectedColorWithAlpha: (CGFloat)alpha;
+
++ (NSColor *)tableViewCellTextInactiveSelectedColorWithAlpha: (CGFloat)alpha;
+
 // Header Colors
 
 + (NSColor *)headerViewBackgroundColor;

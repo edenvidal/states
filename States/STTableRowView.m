@@ -75,13 +75,17 @@
 - (void)updateTextFieldColorForBackground
 {
 	NSTextField *textField = self.cellView.textField;
-	textField.textColor = [NSColor controlTextColor];
+	textField.textColor = [STColorFactory tableViewCellTextRegularColor];
 }
 
 - (void)updateTextFieldColorForSelectionWithAlpha: (CGFloat)alpha
 {
 	NSTextField *textField = self.cellView.textField;
-	textField.textColor = [NSColor colorWithWhite: 10 alpha: alpha];
+	if (self.emphasized) {
+		textField.textColor = [STColorFactory tableViewCellTextSelectedColorWithAlpha: alpha];
+	} else {
+		textField.textColor = [STColorFactory tableViewCellTextRegularColor];
+	}
 }
 
 @end

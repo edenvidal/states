@@ -35,6 +35,21 @@
 	return [NSColor colorWithRed: 235.f/255.f green: 235.f/255.f blue: 235.f/255.f alpha: 1.0f];
 }
 
++ (NSColor *)tableViewCellTextRegularColor
+{
+	return [NSColor controlTextColor];
+}
+
++ (NSColor *)tableViewCellTextSelectedColorWithAlpha: (CGFloat)alpha
+{
+	return [NSColor colorWithWhite: 10 alpha: alpha];
+}
+
++ (NSColor *)tableViewCellTextInactiveSelectedColorWithAlpha: (CGFloat)alpha
+{
+	return [NSColor colorWithWhite: 5 alpha: alpha];
+}
+
 + (NSColor *)headerViewBackgroundColor
 {
 	return [NSColor colorWithRed: 243.f/255.f green: 243.f/255.f blue: 243.f/255.f alpha: 1.0f];
