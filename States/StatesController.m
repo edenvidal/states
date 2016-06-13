@@ -336,6 +336,15 @@ NSString * const kStatesControllerDraggedType = @"StatesControllerDraggedType";
 		NSInteger currentRow = [tableView rowForView: [self cellViewRepresentingCurrentState]];
 		return [NSIndexSet indexSetWithIndex: currentRow];
 	}
+	// Redraw the already selected row when we're dropping multiselection to just this one row
+	if ([tableView selectedRowIndexes].count > 1 && proposedSelectionIndexes.count == 1) {
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+									 (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(),
+		^{
+			[self.tableView rowViewAtRow: proposedSelectionIndexes.firstIndex
+						 makeIfNecessary: NO].needsDisplay = YES;
+		});
+	}
 	return proposedSelectionIndexes;
 }
 
