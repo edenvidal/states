@@ -8,6 +8,7 @@
 
 #import "STColorFactory.h"
 #import "STTableRowView.h"
+#import "STTableCellView.h"
 
 @interface STTableRowView()
 @property (readwrite, weak) NSTableView *tableView;
@@ -34,6 +35,10 @@
 	}
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect: dirtyRect];
 	[path fill];
+
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self updateTextFieldWithAlphaValue: 1.0f];
+	});
 }
 
 - (void)drawSelectionInRect: (NSRect)dirtyRect
@@ -46,6 +51,29 @@
 	}
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect: dirtyRect];
 	[path fill];
+
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self updateTextFieldWithAlphaValue: self.representsCurrentRow ? 1.0f : 0.5f];
+	});
+}
+
+#pragma mark -
+
+// TODO: refactor the delegate to return just YES or NO
+- (BOOL)representsCurrentRow
+{
+	return [self.delegate cellViewRepresentingCurrentState] == self.cellView;
+}
+
+- (STTableCellView *)cellView
+{
+	return [self subviews].firstObject;
+}
+
+- (void)updateTextFieldWithAlphaValue: (CGFloat)newAlpha
+{
+	NSTextField *textField = self.cellView.textField;
+	textField.textColor = [textField.textColor colorWithAlphaComponent: newAlpha];
 }
 
 @end

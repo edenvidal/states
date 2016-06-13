@@ -10,6 +10,7 @@
 
 @class STStatefulArtboard;
 @class STUpdateButton;
+@class STTableCellView;
 
 @interface StatesController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource>
 {
@@ -23,12 +24,17 @@
 + (instancetype)defaultController;
 
 /// XXX
-- (IBAction)createNewState: (id)sender;
+- (void)createNewState: (id)sender;
 /// XXX
-- (IBAction)updateCurrentState: (NSMenuItem *)sender;
+- (void)updateCurrentState: (NSMenuItem *)sender;
 /// XXX
-- (IBAction)duplicateState: (NSMenuItem *)sender;
+- (void)duplicateStates: (NSMenuItem *)sender;
 /// XXX
-- (IBAction)deleteState: (NSMenuItem *)sender;
+- (void)createPageFromStates: (NSMenuItem *)sender;
+/// XXX
+- (void)deleteStates: (NSMenuItem *)sender;
+
+/// XXX
+- (STTableCellView *)cellViewRepresentingCurrentState;
 
 @end

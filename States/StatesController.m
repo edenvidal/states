@@ -11,6 +11,7 @@
 #import "STTableRowView.h"
 #import "STColorFactory.h"
 #import "STTableCellView.h"
+#import "NSArray+Indexes.h"
 #import "STStatefulArtboard.h"
 #import "StatesController.h"
 #import "StatesController+Naming.h"
@@ -20,7 +21,7 @@
 static NSString * const kStatesControllerDraggedType = @"StatesControllerDraggedType";
 
 @interface StatesController()
-<SketchNotificationsListener, NSTextFieldDelegate, STTextFieldFirstResponderDelegate>
+<SketchNotificationsListener, NSTextFieldDelegate, STTextFieldFirstResponderDelegate, STTableRowViewDelegate>
 @end
 
 @implementation StatesController
@@ -115,6 +116,14 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 			cell.updateButton.animator.hidden = YES;
 		}
 	}];
+}
+
+#pragma mark - Public Information
+
+- (STTableCellView *)cellViewRepresentingCurrentState
+{
+	NSInteger idx = [_artboard.allStates indexOfObject: _artboard.currentState];
+	return [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
 }
 
 #pragma mark - User Actions
@@ -337,6 +346,11 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	if (previouslySelectedRow == -1) {
 		return YES;
 	}
+
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self.tableView rowViewAtRow: row makeIfNecessary: NO].needsDisplay = YES;
+	});
+
 	STStateDescription *oldState = _artboard.allStates[previouslySelectedRow];
 	STStateDescription *newState = _artboard.allStates[row];
 	return [self shouldSwitchToState: newState fromState: oldState];
@@ -346,7 +360,9 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 - (NSTableRowView *)tableView: (NSTableView *)tableView rowViewForRow: (NSInteger)row
 {
-	return [[STTableRowView alloc] initWithTableView: tableView];
+	STTableRowView *rowView = [[STTableRowView alloc] initWithTableView: tableView];
+	rowView.delegate = self;
+	return rowView;
 }
 
 #pragma mark Drag'n'Drop
