@@ -122,6 +122,9 @@
 - (STTableCellView *)cellViewRepresentingCurrentState
 {
 	NSInteger idx = [_artboard.allStates indexOfObject: _artboard.currentState];
+	if (!_artboard || idx == NSNotFound) {
+		return nil;
+	}
 	return [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
 }
 
