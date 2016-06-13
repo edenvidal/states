@@ -328,6 +328,17 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 #pragma mark Selection Filter
 
+- (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes
+{
+	// Don't allow table view to reset selection automatically from multiple rows to "nothing". In
+	// this case it will select the last row which may not represent the current state
+	if ([tableView selectedRowIndexes].count > 1 && proposedSelectionIndexes.count == 0) {
+		NSInteger currentRow = [tableView rowForView: [self cellViewRepresentingCurrentState]];
+		return [NSIndexSet indexSetWithIndex: currentRow];
+	}
+	return proposedSelectionIndexes;
+}
+
 - (BOOL)tableView: (NSTableView *)tableView shouldSelectRow: (NSInteger)row
 {
 	// Always allow to expand selection. Note that we don't switch states in this case
