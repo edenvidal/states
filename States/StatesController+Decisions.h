@@ -10,11 +10,11 @@
 
 @class STStateDescription;
 
+/// A category that asks user's confirmation for (likely) destructive events
 @interface StatesController (Decisions)
 
-/// XXX
 - (BOOL)shouldSwitchToState: (STStateDescription *)newState fromState: (STStateDescription *)oldState;
-/// XXX
+
 - (BOOL)shoulRemoveStates: (NSArray <STStateDescription *> *)states;
 
 @end

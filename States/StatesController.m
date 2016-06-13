@@ -290,7 +290,7 @@ STTableCellViewDelegate>
 	[self resetDirtyMarkOnStates];
 }
 
-/// XXX
+/// Hide an update button when a state title is being edited
 - (void)textFieldBecomeFirstResponder: (NSTextField *)textField
 {
 	NSInteger row = [self.tableView rowForView: textField];
@@ -319,14 +319,14 @@ STTableCellViewDelegate>
 		return nil;
 	}
 	cellView.delegate = self;
-	// XXX
+	// Setup text field
 	cellView.textField.stringValue = state.title;
 	cellView.textField.delegate = self;
 	((STTextField *)cellView.textField).firstResponderDelegate = self;
-	// XXX
+	// Setup update button
 	cellView.updateButton.action = @selector(updateCurrentState:);
 	cellView.updateButton.target = self;
-	// XXX
+	// Toggle update button's visibility
 	if ([[tableView selectedRowIndexes] containsIndex: row]) {
 		cellView.updateButton.hidden = [_artboard conformsToState: state];
 	} else {

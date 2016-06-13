@@ -32,7 +32,7 @@
 	[super drawBackgroundInClipRect: clipRect];
 
 	[[STColorFactory tableViewBackgroundColor] setFill];
-	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect: clipRect xRadius: 0.f yRadius: 0.f];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRect: clipRect];
 	[path fill];
 }
 

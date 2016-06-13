@@ -8,6 +8,7 @@
 
 @import Cocoa;
 
+/// Keeps all of the custom colors for this project
 @interface STColorFactory : NSObject
 
 // Table View Colors

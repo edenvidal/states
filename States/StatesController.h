@@ -12,6 +12,11 @@
 @class STUpdateButton;
 @class STTableCellView;
 
+/// Well, well, well. Here you are, looking for a big fish. This one is responsible for managing
+/// the states table view and responding to user's actions by modifing current artboard.
+///
+/// It's huge and ungly. But I did my bext to make this controller as stateless (such irony!) as
+/// possible so at least one could easily refactor different bits into separate classes 🌟
 @interface StatesController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource>
 {
 @protected
@@ -23,15 +28,16 @@
 
 + (instancetype)defaultController;
 
-/// XXX
+/// Creates a new state
 - (void)createNewState: (id)sender;
-/// XXX
+/// Update the current state: make it reflect current artboard attributes
 - (void)updateCurrentState: (NSMenuItem *)sender;
-/// XXX
+/// Create duplicates for all selected states
 - (void)duplicateStates: (NSMenuItem *)sender;
-/// XXX
+/// Create a one page containing as many artboards as selected states: each of them will contain
+/// a snapshot of the current artboard in a corresponding state
 - (void)createPageFromStates: (NSMenuItem *)sender;
-/// XXX
+/// Delete all selected states
 - (void)deleteStates: (NSMenuItem *)sender;
 
 @end

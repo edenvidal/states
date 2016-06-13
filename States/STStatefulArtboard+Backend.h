@@ -8,7 +8,7 @@
 
 #import "STStatefulArtboard.h"
 
-/// XXX
+/// STStatefulArtboard extension that allows to save data inside Sketch metadata
 @interface STStatefulArtboard (Backend)
 
 - (nonnull NSArray <NSDictionary *> *)artboardStatesData;

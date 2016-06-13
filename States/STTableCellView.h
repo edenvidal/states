@@ -18,6 +18,8 @@
 - (BOOL)isSingleRowSelected;
 @end
 
+/// A cell view that sets custom text field colors depending on whether it represents the current
+/// state model or not
 @interface STTableCellView : NSTableCellView
 
 @property (weak) id <STTableCellViewDelegate> delegate;

@@ -22,7 +22,8 @@
 		return YES;
 	}
 
-	/// XXX
+	// When we're switching to the same state it means we're to reset all of the changes
+	// made to this state
 	if ([oldState isEqual: newState]) {
 		NSAlert *alert = [[NSAlert alloc] init];
 		alert.messageText = [NSString stringWithFormat:
@@ -42,6 +43,7 @@
 				return NO;
 		}
 	} else {
+		// Otherwise it's just a regular switch between different states
 		NSAlert *alert = [[NSAlert alloc] init];
 		alert.messageText = [NSString stringWithFormat:
 							 @"Update changes to state \"%@\" before switching to \"%@\"?",

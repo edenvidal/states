@@ -9,6 +9,7 @@
 #import "StatesController.h"
 @class STStateDescription;
 
+/// Naming things is the second hard thing in programming
 @interface StatesController (Naming)
 
 /// Enumerates names such as "State", "State 1", "State 2" etc and returns the first available one

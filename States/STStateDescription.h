@@ -8,6 +8,7 @@
 
 @import Foundation;
 
+/// Represents a State model. Each state has a title and an unique identifier.
 @interface STStateDescription : NSObject
 
 @property (readonly, copy) NSString *title;
@@ -25,7 +26,7 @@
 /// Returns a new state with random UUID and title equal to the current state's title with " Copy" suffix
 - (instancetype)duplicate;
 
-/// XXX
+/// Returns a dictionary representation of this state model
 - (NSDictionary <NSString *, id> *)dictionaryRepresentation;
 
 @end

@@ -10,7 +10,7 @@
 
 @protocol STLayer;
 
-/// XXX
+/// Incapsulates a state of a single layer: its frame and visibility status
 @interface STLayerState : NSObject
 
 @property (readonly) NSRect frame;
@@ -24,17 +24,17 @@
 
 @end
 
-/// XXX
+/// Applies the given layer state to the given layer
 @interface STLayerStateApplier : NSObject
 + (void)apply: (STLayerState *)state toLayer: (id <STLayer>)layer;
 @end
 
-/// XXX
+/// Returns the current layer's state
 @interface STLayerStateFetcher : NSObject
 + (STLayerState *)fetchStateFromLayer: (id <STLayer>)layer;
 @end
 
-/// XXX
+/// Verifies that the given layer conforms to the given state
 @interface STLayerStateExaminer : NSObject
 + (BOOL)layer: (id <STLayer>)layer conformsToState: (STLayerState *)state;
 @end

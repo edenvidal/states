@@ -8,6 +8,6 @@
 
 @import Cocoa;
 
+/// A header view with a custom background color
 @interface STHeaderView : NSView
-
 @end

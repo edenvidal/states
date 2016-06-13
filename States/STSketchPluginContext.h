@@ -10,6 +10,7 @@
 #import "STDocument.h"
 #import "STCommand.h"
 
+/// Encapsulate a Sketch plugin context dictionary
 @interface STSketchPluginContext : NSObject
 
 @property (readonly, strong) id pluginBundle;

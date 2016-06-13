@@ -8,6 +8,6 @@
 
 @import Cocoa;
 
-/// XXX
+/// A table view that disables navigation with arrow keys and draws a custom background
 @interface STTableView : NSTableView
 @end
