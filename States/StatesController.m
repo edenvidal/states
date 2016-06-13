@@ -123,7 +123,6 @@ STTableCellViewDelegate>
 - (BOOL)cellViewRepresentsCurrentItem: (STTableCellView *)cellView
 {
 	NSInteger idx = [_artboard.allStates indexOfObject: _artboard.currentState];
-	NSLog(@"CURENT INX: %ld", idx);
 	if (!_artboard || idx == NSNotFound) {
 		return NO;
 	}
