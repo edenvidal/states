@@ -244,6 +244,7 @@
 	// -tableView:shouldSelectRow: has been called already so we just check if the target row
 	// is selected and apply the new state accordingly.
 	if ([self.tableView isRowSelected: row]) {
+		NSLog(@"asdadsad");
 		[_artboard applyState: newState];
 		[self resetDirtyMarkOnStates];
 	}
@@ -346,37 +347,33 @@
 			[self.tableView rowViewAtRow: proposedSelectionIndexes.firstIndex
 						 makeIfNecessary: NO].needsDisplay = YES;
 		});
+		return proposedSelectionIndexes;
 	}
-	return proposedSelectionIndexes;
-}
 
-- (BOOL)tableView: (NSTableView *)tableView shouldSelectRow: (NSInteger)row
-{
 	// Always allow to expand selection. Note that we don't switch states in this case
-	NSEventModifierFlags flags = [NSApp currentEvent].modifierFlags;
-	NSEventType type = [NSApp currentEvent].type;
-
-	BOOL cmdPressed   = (flags & NSCommandKeyMask) == NSCommandKeyMask;
-	BOOL shiftPressed = (flags & NSShiftKeyMask) == NSShiftKeyMask;
-	BOOL leftMouseDragged = (type == NSLeftMouseDragged);
-
-	if (cmdPressed || shiftPressed || leftMouseDragged) {
-		return YES;
+	if (proposedSelectionIndexes.count > 1) {
+		NSLog(@"Expanding selection: from %@ to %@",
+			  self.tableView.selectedRowIndexes, proposedSelectionIndexes);
+		return proposedSelectionIndexes;
+	}
+	// Always allow initial selection
+	if (self.tableView.selectedRowIndexes.count == 0) {
+		return proposedSelectionIndexes;
+	}
+	// Don't allow to dropping selection from one row to zero
+	if (proposedSelectionIndexes.count == 0) {
+		return [NSIndexSet indexSet];
+	}
+	// So we're switching from one state to another; ask user about this
+	STStateDescription *oldState = _artboard.allStates[tableView.selectedRowIndexes.firstIndex];
+	STStateDescription *newState = _artboard.allStates[proposedSelectionIndexes.firstIndex];
+	if ([self shouldSwitchToState: newState fromState: oldState]) {
+		return proposedSelectionIndexes;
 	}
 
-	NSInteger previouslySelectedRow = [tableView selectedRow];
-	if (previouslySelectedRow == -1) {
-		return YES;
-	}
-
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self.tableView rowViewAtRow: row makeIfNecessary: NO].needsDisplay = YES;
-	});
-
-	STStateDescription *oldState = _artboard.allStates[previouslySelectedRow];
-	STStateDescription *newState = _artboard.allStates[row];
-	return [self shouldSwitchToState: newState fromState: oldState];
+	return [NSIndexSet indexSet];
 }
+
 
 #pragma mark Row Coloring
 
