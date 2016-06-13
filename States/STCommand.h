@@ -12,7 +12,7 @@
 @protocol STCommand <NSObject>
 @optional
 
-- (void)setValue: (id)value forKey: (id <NSCopying>)key onLayer:(id <STLayer>)layer;
-- (id)valueForKey:(id <NSCopying>)key onLayer:(id <STLayer>)layer;
+- (void)setValue: (id)value forKey: (id <NSCopying>)key onLayer: (id <STLayer>)layer;
+- (id)valueForKey: (id <NSCopying>)key onLayer: (id <STLayer>)layer;
 
 @end

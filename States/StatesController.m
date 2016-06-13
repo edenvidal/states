@@ -282,7 +282,7 @@
 }
 
 /// XXX
-- (void)textFieldBecomeFirstResponder:(NSTextField *)textField
+- (void)textFieldBecomeFirstResponder: (NSTextField *)textField
 {
 	NSInteger row = [self.tableView rowForView: textField];
 	if (row < 0 || row >= _artboard.allStates.count) {
@@ -327,7 +327,7 @@
 
 #pragma mark Selection Filter
 
-- (NSIndexSet *)tableView:(NSTableView *)tableView selectionIndexesForProposedSelection:(NSIndexSet *)proposedSelectionIndexes
+- (NSIndexSet *)tableView: (NSTableView *)tableView selectionIndexesForProposedSelection: (NSIndexSet *)proposedSelectionIndexes
 {
 	// Don't allow table view to reset selection automatically from multiple rows to "nothing". In
 	// this case it will select the last row which may not represent the current state
