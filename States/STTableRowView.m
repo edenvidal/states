@@ -35,10 +35,6 @@
 	}
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect: dirtyRect];
 	[path fill];
-
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self updateTextFieldColorForBackground];
-	});
 }
 
 - (void)drawSelectionInRect: (NSRect)dirtyRect
@@ -51,41 +47,6 @@
 	}
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect: dirtyRect];
 	[path fill];
-
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self updateTextFieldColorForSelectionWithAlpha: self.representsCurrentRow ? 1.0f : 0.5f];
-	});
-}
-
-#pragma mark -
-
-// TODO: refactor the delegate to return just YES or NO
-- (BOOL)representsCurrentRow
-{
-	return [self.delegate cellViewRepresentingCurrentState] == self.cellView;
-}
-
-- (STTableCellView *)cellView
-{
-	return [self subviews].firstObject;
-}
-
-// TODO: move these into STTableCellView
-
-- (void)updateTextFieldColorForBackground
-{
-	NSTextField *textField = self.cellView.textField;
-	textField.textColor = [STColorFactory tableViewCellTextRegularColor];
-}
-
-- (void)updateTextFieldColorForSelectionWithAlpha: (CGFloat)alpha
-{
-	NSTextField *textField = self.cellView.textField;
-	if (self.emphasized) {
-		textField.textColor = [STColorFactory tableViewCellTextSelectedColorWithAlpha: alpha];
-	} else {
-		textField.textColor = [STColorFactory tableViewCellTextRegularColor];
-	}
 }
 
 @end

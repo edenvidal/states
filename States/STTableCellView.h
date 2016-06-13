@@ -10,8 +10,17 @@
 
 #import "STUpdateButton.h"
 
+@class STTableCellView;
+
+@protocol STTableCellViewDelegate <NSObject>
+@required
+- (BOOL)cellViewRepresentsCurrentItem: (STTableCellView *)cellView;
+- (BOOL)isSingleRowSelected;
+@end
+
 @interface STTableCellView : NSTableCellView
 
+@property (weak) id <STTableCellViewDelegate> delegate;
 @property (weak) IBOutlet STUpdateButton *updateButton;
 
 @end

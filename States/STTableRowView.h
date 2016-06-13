@@ -8,17 +8,9 @@
 
 @import Cocoa;
 
-@class STTableCellView;
-
-@protocol STTableRowViewDelegate <NSObject>
-@required
-- (STTableCellView *)cellViewRepresentingCurrentState;
-@end
-
 /// XXX
 @interface STTableRowView : NSTableRowView
 
-@property (weak) id <STTableRowViewDelegate> delegate;
 @property (readonly, weak) NSTableView *tableView;
 
 - (instancetype)initWithTableView: (NSTableView *)containingTableView;

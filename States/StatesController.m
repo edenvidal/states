@@ -20,7 +20,8 @@
 #import "StatesController+ContextMenu.h"
 
 @interface StatesController()
-<SketchNotificationsListener, NSTextFieldDelegate, STTextFieldFirstResponderDelegate, STTableRowViewDelegate>
+<SketchNotificationsListener, NSTextFieldDelegate, STTextFieldFirstResponderDelegate,
+STTableCellViewDelegate>
 @end
 
 @implementation StatesController
@@ -117,15 +118,21 @@
 	}];
 }
 
-#pragma mark - Public Information
+#pragma mark - STTableCellViewDelegate
 
-- (STTableCellView *)cellViewRepresentingCurrentState
+- (BOOL)cellViewRepresentsCurrentItem: (STTableCellView *)cellView
 {
 	NSInteger idx = [_artboard.allStates indexOfObject: _artboard.currentState];
+	NSLog(@"CURENT INX: %ld", idx);
 	if (!_artboard || idx == NSNotFound) {
-		return nil;
+		return NO;
 	}
-	return [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
+	return cellView == [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
+}
+
+- (BOOL)isSingleRowSelected
+{
+	return [self.tableView selectedRowIndexes].count == 1;
 }
 
 #pragma mark - User Actions
@@ -244,7 +251,6 @@
 	// -tableView:shouldSelectRow: has been called already so we just check if the target row
 	// is selected and apply the new state accordingly.
 	if ([self.tableView isRowSelected: row]) {
-		NSLog(@"asdadsad");
 		[_artboard applyState: newState];
 		[self resetDirtyMarkOnStates];
 	}
@@ -313,6 +319,7 @@
 	if (!cellView) {
 		return nil;
 	}
+	cellView.delegate = self;
 	// XXX
 	cellView.textField.stringValue = state.title;
 	cellView.textField.delegate = self;
@@ -360,8 +367,6 @@
 
 	// Always allow to expand selection. Note that we don't switch states in this case
 	if (proposedSelectionIndexes.count > 1) {
-		NSLog(@"Expanding selection: from %@ to %@",
-			  self.tableView.selectedRowIndexes, proposedSelectionIndexes);
 		return proposedSelectionIndexes;
 	}
 	// Always allow initial selection
@@ -382,14 +387,20 @@
 	return [NSIndexSet indexSet];
 }
 
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+	[_artboard.allStates enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL * stop) {
+		NSTableCellView *view = [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
+		view.backgroundStyle = view.backgroundStyle;
+	}];
+}
+
 
 #pragma mark Row Coloring
 
 - (NSTableRowView *)tableView: (NSTableView *)tableView rowViewForRow: (NSInteger)row
 {
-	STTableRowView *rowView = [[STTableRowView alloc] initWithTableView: tableView];
-	rowView.delegate = self;
-	return rowView;
+	return [[STTableRowView alloc] initWithTableView: tableView];
 }
 
 @end

@@ -34,7 +34,4 @@
 /// XXX
 - (void)deleteStates: (NSMenuItem *)sender;
 
-/// XXX
-- (STTableCellView *)cellViewRepresentingCurrentState;
-
 @end
