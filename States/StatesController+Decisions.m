@@ -11,6 +11,8 @@
 #import "NSArray+HigherOrder.h"
 #import "StatesController+Decisions.h"
 
+#define kNumberOfStatesToShowInDeleteAlert (10)
+
 @implementation StatesController (Decisions)
 
 - (BOOL)shouldSwitchToState: (STStateDescription *)newState fromState: (STStateDescription *)oldState
@@ -74,10 +76,11 @@
 		return [NSString stringWithFormat: @"\t• %@", state.title];
 	}];
 
-	if (titles.count > 10) {
+	if (titles.count > kNumberOfStatesToShowInDeleteAlert) {
 		NSInteger total = titles.count;
-		titles = [titles subarrayWithRange: NSMakeRange(0, 10)];
-		titles = [titles arrayByAddingObject: [NSString stringWithFormat: @"\t(and %ld more)", total-10]];
+		titles = [titles subarrayWithRange: NSMakeRange(0, kNumberOfStatesToShowInDeleteAlert)];
+		titles = [titles arrayByAddingObject: [NSString stringWithFormat: @"\t(and %ld more)",
+											   total-kNumberOfStatesToShowInDeleteAlert]];
 	}
 
 	NSAlert *alert = [[NSAlert alloc] init];
