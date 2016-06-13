@@ -8,7 +8,7 @@
 
 @import Cocoa;
 
-typedef void(^STUpdateButtonAnimationCompletion)(void);
+typedef void (^STUpdateButtonAnimationCompletion)(void);
 
 @interface STUpdateButton : NSButton
 
