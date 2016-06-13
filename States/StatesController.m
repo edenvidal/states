@@ -388,6 +388,7 @@ STTableCellViewDelegate>
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
+	// Update cell views for current selection state (e.g. set text color, etc)
 	[_artboard.allStates enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL * stop) {
 		NSTableCellView *view = [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
 		view.backgroundStyle = view.backgroundStyle;
