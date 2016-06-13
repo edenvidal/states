@@ -372,7 +372,7 @@ STTableCellViewDelegate>
 	if (self.tableView.selectedRowIndexes.count == 0) {
 		return proposedSelectionIndexes;
 	}
-	// Don't allow to dropping selection from one row to zero
+	// Don't allow to drop selection from one row to zero
 	if (proposedSelectionIndexes.count == 0) {
 		return [NSIndexSet indexSet];
 	}
