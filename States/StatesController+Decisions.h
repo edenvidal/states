@@ -15,6 +15,6 @@
 /// XXX
 - (BOOL)shouldSwitchToState: (STStateDescription *)newState fromState: (STStateDescription *)oldState;
 /// XXX
-- (BOOL)shoulRemoveState: (STStateDescription *)state;
+- (BOOL)shoulRemoveStates: (NSArray <STStateDescription *> *)states;
 
 @end

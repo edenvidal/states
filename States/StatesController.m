@@ -159,36 +159,48 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	}
 }
 
-- (IBAction)duplicateState: (NSMenuItem *)sender
+- (IBAction)duplicateStates: (NSMenuItem *)sender
 {
-	STStateDescription *original = sender.representedObject;
-	NSParameterAssert(original != nil);
+	NSArray <STStateDescription *> *originals = sender.representedObject;
+	NSParameterAssert([originals isKindOfClass: [NSArray class]]);
 
-	NSString *duplicateTitle = [NSString stringWithFormat: @"%@ copy", original.title];
-	STStateDescription *duplicate = [[STStateDescription alloc] initWithTitle: duplicateTitle];
-
-	[_artboard insertNewState: duplicate];
-	[_artboard copyState: original toState: duplicate];
-
+	[originals enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
+		NSString *duplicateTitle = [NSString stringWithFormat: @"%@ copy", state.title];
+		STStateDescription *duplicate = [[STStateDescription alloc] initWithTitle: duplicateTitle];
+		[_artboard insertNewState: duplicate];
+		[_artboard copyState: state toState: duplicate];
+	}];
 	// Update the table view
-	NSInteger newIndex = _artboard.allStates.count-1;
-	[self.tableView insertRowsAtIndexes: [NSIndexSet indexSetWithIndex: newIndex]
+	NSRange newStatesRange = NSMakeRange(_artboard.allStates.count-1, originals.count);
+	NSIndexSet *newIndexes = [NSIndexSet indexSetWithIndexesInRange: newStatesRange];
+	[self.tableView insertRowsAtIndexes: newIndexes
 						  withAnimation: NSTableViewAnimationEffectFade];
 }
 
-- (IBAction)deleteState: (NSMenuItem *)sender
+- (void)createPageFromStates: (NSMenuItem *)sender
 {
-	STStateDescription *stateToDelete = sender.representedObject;
-	NSParameterAssert(stateToDelete != nil);
-	NSParameterAssert([stateToDelete isNotEqualTo: _artboard.defaultState]);
+	NSAssert(NO, @"Not Implemented Yet");
+}
 
-	if (![self shoulRemoveState: stateToDelete]) {
+- (IBAction)deleteStates: (NSMenuItem *)sender
+{
+	NSMutableArray <STStateDescription *> *statesToDelete = [sender.representedObject mutableCopy];
+	NSParameterAssert([statesToDelete isKindOfClass: [NSArray class]]);
+
+	// We can not remove the default state so just remove if from the proposed set of states
+	[statesToDelete removeObject: _artboard.defaultState];
+
+	if (![self shoulRemoveStates: statesToDelete]) {
 		return;
 	}
-	NSInteger idx = [_artboard.allStates indexOfObject: stateToDelete];
-	[_artboard removeState: stateToDelete];
-	[self.tableView removeRowsAtIndexes: [NSIndexSet indexSetWithIndex: idx]
-						  withAnimation: NSTableViewAnimationEffectFade];
+	NSIndexSet *indexesToDelete = [_artboard.allStates rd_indexesOfObjects: statesToDelete];
+	// 1) remove states from data model
+	[statesToDelete enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
+		[_artboard removeState: state];
+	}];
+	// 2) remove corresponding rows from table view
+	[self.tableView removeRowsAtIndexes: indexesToDelete withAnimation: NSTableViewAnimationEffectFade];
+	// 3) update table view selection
 	NSInteger newCurrentState = [_artboard.allStates indexOfObject: _artboard.currentState];
 	if (newCurrentState != NSNotFound) {
 		[self.tableView selectRowIndexes: [NSIndexSet indexSetWithIndex: newCurrentState]
@@ -198,6 +210,11 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 - (void)singleClicked: (id)sender
 {
+	// Ignore clicks when multiple rows are selected
+	if ([self.tableView selectedRowIndexes].count > 1) {
+		return;
+	}
+
 	NSInteger row = [self.tableView clickedRow];
 	if (row < 0 || row >= _artboard.allStates.count) {
 		return;
@@ -223,6 +240,11 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 - (void)doubleClicked: (id)sender
 {
+	// Ignore clicks when multiple rows are selected
+	if ([self.tableView selectedRowIndexes].count > 1) {
+		return;
+	}
+
 	NSInteger row = [self.tableView clickedRow];
 	if (row < 0 || row >= _artboard.allStates.count) {
 		return;
