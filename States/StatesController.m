@@ -394,7 +394,6 @@ STTableCellViewDelegate>
 	}];
 }
 
-
 #pragma mark Row Coloring
 
 - (NSTableRowView *)tableView: (NSTableView *)tableView rowViewForRow: (NSInteger)row
