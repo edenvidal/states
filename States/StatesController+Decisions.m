@@ -74,6 +74,12 @@
 		return [NSString stringWithFormat: @"\t• %@", state.title];
 	}];
 
+	if (titles.count > 10) {
+		NSInteger total = titles.count;
+		titles = [titles subarrayWithRange: NSMakeRange(0, 10)];
+		titles = [titles arrayByAddingObject: [NSString stringWithFormat: @"\t(and %ld more)", total-10]];
+	}
+
 	NSAlert *alert = [[NSAlert alloc] init];
 	if (titles.count == 1) {
 		alert.messageText = [NSString stringWithFormat:
