@@ -336,11 +336,19 @@
 	// Don't allow table view to reset selection automatically from multiple rows to "nothing". In
 	// this case it will select the last row which may not represent the current state
 	if ([tableView selectedRowIndexes].count > 1 && proposedSelectionIndexes.count == 0) {
-		NSInteger currentRow = [tableView rowForView: [self cellViewRepresentingCurrentState]];
-		return [NSIndexSet indexSetWithIndex: currentRow];
+		NSInteger currentRow = [_artboard.allStates indexOfObject: _artboard.currentState];
+		if (currentRow != NSNotFound) {
+			return [NSIndexSet indexSetWithIndex: currentRow];
+		} else {
+			return [NSIndexSet indexSet];
+		}
 	}
 	// Redraw the already selected row when we're dropping multiselection to just this one row
 	if ([tableView selectedRowIndexes].count > 1 && proposedSelectionIndexes.count == 1) {
+		STStateDescription *newState = _artboard.allStates[proposedSelectionIndexes.firstIndex];
+		if (![self shouldSwitchToState: newState fromState: _artboard.currentState]) {
+			return [NSIndexSet indexSet];
+		}
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
 									 (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(),
 		^{
