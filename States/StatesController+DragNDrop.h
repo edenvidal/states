@@ -10,7 +10,9 @@
 
 @interface StatesController (DragNDrop)
 
-// This category implements the following NSTableViewDataSources methods:
+- (void)registerTableViewForDragNDrop;
+
+// This category also implements the following NSTableViewDataSources methods:
 
 - (BOOL)tableView: (NSTableView *)tableView writeRowsWithIndexes: (NSIndexSet *)rowIndexes toPasteboard: (NSPasteboard *)pboard;
 

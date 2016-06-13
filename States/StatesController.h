@@ -8,8 +8,6 @@
 
 @import Cocoa;
 
-extern NSString * const kStatesControllerDraggedType;
-
 @class STStatefulArtboard;
 @class STUpdateButton;
 @class STTableCellView;

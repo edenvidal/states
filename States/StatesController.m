@@ -16,9 +16,8 @@
 #import "StatesController.h"
 #import "StatesController+Naming.h"
 #import "StatesController+Decisions.h"
+#import "StatesController+DragNDrop.h"
 #import "StatesController+ContextMenu.h"
-
-NSString * const kStatesControllerDraggedType = @"StatesControllerDraggedType";
 
 @interface StatesController()
 <SketchNotificationsListener, NSTextFieldDelegate, STTextFieldFirstResponderDelegate, STTableRowViewDelegate>
@@ -56,7 +55,7 @@ NSString * const kStatesControllerDraggedType = @"StatesControllerDraggedType";
 	self.tableView.menu.delegate = self;
 	self.tableView.action = @selector(singleClicked:);
 	self.tableView.doubleAction = @selector(doubleClicked:);
-	[self.tableView registerForDraggedTypes: @[kStatesControllerDraggedType]];
+	[self registerTableViewForDragNDrop];
 
 	[self resetArtboard: [STSketch currentArtboard]];
 }

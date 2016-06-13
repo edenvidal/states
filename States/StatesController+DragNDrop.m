@@ -9,7 +9,14 @@
 #import "STStatefulArtboard.h"
 #import "StatesController+DragNDrop.h"
 
+NSString * const kStatesControllerDraggedType = @"StatesControllerDraggedType";
+
 @implementation StatesController (DragNDrop)
+
+- (void)registerTableViewForDragNDrop;
+{
+	[self.tableView registerForDraggedTypes: @[kStatesControllerDraggedType]];
+}
 
 - (BOOL)tableView: (NSTableView *)tableView writeRowsWithIndexes: (NSIndexSet *)rowIndexes toPasteboard: (NSPasteboard *)pboard
 {
