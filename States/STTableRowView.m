@@ -37,7 +37,7 @@
 	[path fill];
 
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self updateTextFieldWithAlphaValue: 1.0f];
+		[self updateTextFieldColorForBackground];
 	});
 }
 
@@ -53,7 +53,7 @@
 	[path fill];
 
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self updateTextFieldWithAlphaValue: self.representsCurrentRow ? 1.0f : 0.5f];
+		[self updateTextFieldColorForSelectionWithAlpha: self.representsCurrentRow ? 1.0f : 0.5f];
 	});
 }
 
@@ -70,10 +70,18 @@
 	return [self subviews].firstObject;
 }
 
-- (void)updateTextFieldWithAlphaValue: (CGFloat)newAlpha
+// TODO: move these into STTableCellView
+
+- (void)updateTextFieldColorForBackground
 {
 	NSTextField *textField = self.cellView.textField;
-	textField.textColor = [textField.textColor colorWithAlphaComponent: newAlpha];
+	textField.textColor = [NSColor controlTextColor];
+}
+
+- (void)updateTextFieldColorForSelectionWithAlpha: (CGFloat)alpha
+{
+	NSTextField *textField = self.cellView.textField;
+	textField.textColor = [NSColor colorWithWhite: 10 alpha: alpha];
 }
 
 @end
