@@ -299,6 +299,18 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 - (BOOL)tableView: (NSTableView *)tableView shouldSelectRow: (NSInteger)row
 {
+	// Always allow to expand selection. Note that we don't switch states in this case
+	NSEventModifierFlags flags = [NSApp currentEvent].modifierFlags;
+	NSEventType type = [NSApp currentEvent].type;
+
+	BOOL cmdPressed   = (flags & NSCommandKeyMask) == NSCommandKeyMask;
+	BOOL shiftPressed = (flags & NSShiftKeyMask) == NSShiftKeyMask;
+	BOOL leftMouseDragged = (type == NSLeftMouseDragged);
+
+	if (cmdPressed || shiftPressed || leftMouseDragged) {
+		return YES;
+	}
+
 	NSInteger previouslySelectedRow = [tableView selectedRow];
 	if (previouslySelectedRow == -1) {
 		return YES;
