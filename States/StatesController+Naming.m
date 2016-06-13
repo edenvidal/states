@@ -16,7 +16,8 @@
 - (NSString *)newStateNameInStates: (NSArray <STStateDescription *> *)existingStates
 {
 	static NSString *template = @"State";
-	NSSet *matchedNames = [NSSet setWithArray: [existingStates rd_map: ^NSString *(STStateDescription *state) {
+	NSSet *matchedNames = [NSSet setWithArray:
+						   [existingStates rd_map: ^NSString *(STStateDescription *state) {
 		return state.title;
 	}]];
 
