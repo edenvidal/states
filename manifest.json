@@ -8,7 +8,7 @@
 	"compatibleVersion": 3,
 	"bundleVersion": 1,
 	"commands": [{
-		"name": "Show States of Artboard",
+		"name": "Show States",
 		"identifier": "show-states",
 		"script": "plugin.js",
 		"handler": "showStatesWindow"
