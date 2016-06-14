@@ -30,8 +30,9 @@
 	}
 
 	STStateDescription *clickedState = _artboard.allStates[clickedRow];
+	// We're clicking an a row that isn't part of current selection: show a menu just for this one row
 	if (![selectedStates containsObject: clickedState]) {
-		selectedStates = [selectedStates arrayByAddingObject: clickedState];
+		selectedStates = @[clickedState];
 	}
 
 	// TODO?: add support for updating non-current states as well. Need to figure out
