@@ -8,6 +8,6 @@
 
 @interface NSArray (Indexes)
 
-- (nonnull NSIndexSet *)rd_indexesOfObjects: (nonnull NSArray *)subarray;
+- (nonnull NSIndexSet *)st_indexesOfObjects: (nonnull NSArray *)subarray;
 
 @end

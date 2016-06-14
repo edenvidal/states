@@ -8,8 +8,8 @@
 
 @interface NSArray (HigherOrder)
 
-- (nonnull NSArray *)rd_map: (nonnull id _Nonnull (^)(id _Nonnull obj))mapper;
+- (nonnull NSArray *)st_map: (nonnull id _Nonnull (^)(id _Nonnull obj))mapper;
 
-- (nonnull NSArray *)rd_filter: (nonnull BOOL (^)(id _Nonnull obj))block;
+- (nonnull NSArray *)st_filter: (nonnull BOOL (^)(id _Nonnull obj))block;
 
 @end

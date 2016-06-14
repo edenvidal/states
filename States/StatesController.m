@@ -211,7 +211,7 @@
 	if (![self shoulRemoveStates: statesToDelete]) {
 		return;
 	}
-	NSIndexSet *indexesToDelete = [_artboard.allStates rd_indexesOfObjects: statesToDelete];
+	NSIndexSet *indexesToDelete = [_artboard.allStates st_indexesOfObjects: statesToDelete];
 	// 1) remove states from data model
 	[statesToDelete enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
 		[_artboard removeState: state];

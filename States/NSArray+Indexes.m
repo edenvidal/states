@@ -8,7 +8,7 @@
 
 @implementation NSArray (Indexes)
 
-- (nonnull NSIndexSet *)rd_indexesOfObjects: (nonnull NSArray *)subarray
+- (nonnull NSIndexSet *)st_indexesOfObjects: (nonnull NSArray *)subarray
 {
 	return [self indexesOfObjectsPassingTest: ^BOOL(id obj, NSUInteger idx, BOOL * stop) {
 		return [subarray containsObject: obj];

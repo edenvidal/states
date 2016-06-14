@@ -72,7 +72,7 @@
 {
 	NSParameterAssert(states.count > 0);
 
-	NSArray <NSString *>*titles = [states rd_map: ^NSString *(STStateDescription *state) {
+	NSArray <NSString *>*titles = [states st_map: ^NSString *(STStateDescription *state) {
 		return [NSString stringWithFormat: @"\t• %@", state.title];
 	}];
 

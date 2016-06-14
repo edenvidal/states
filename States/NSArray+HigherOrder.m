@@ -9,7 +9,7 @@
 
 @implementation NSArray (HigherOrder)
 
-- (NSArray *)rd_map: (nonnull id _Nonnull (^)(id _Nonnull obj))mapper
+- (NSArray *)st_map: (nonnull id _Nonnull (^)(id _Nonnull obj))mapper
 {
 	NSMutableArray *result = [NSMutableArray arrayWithCapacity: self.count];
 	[self enumerateObjectsUsingBlock: ^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -18,7 +18,7 @@
 	return result;
 }
 
-- (NSArray *)rd_filter: (BOOL (^)(id))block
+- (NSArray *)st_filter: (BOOL (^)(id))block
 {
 	NSMutableArray *new = [NSMutableArray array];
 	[self enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {

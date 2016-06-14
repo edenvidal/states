@@ -45,7 +45,7 @@
 
 - (NSArray <id <STLayer>> *)children
 {
-	return [[_internal children] rd_filter: ^BOOL(id child) {
+	return [[_internal children] st_filter: ^BOOL(id child) {
 		return [child class] != NSClassFromString(@"MSArtboardGroup");
 	}];
 }
@@ -100,14 +100,14 @@
 	}
 
 	// 1) Remove from artboard state descriptions
-	NSArray *statesToKeep = [[self artboardStatesData] rd_filter: ^BOOL(NSDictionary *item) {
+	NSArray *statesToKeep = [[self artboardStatesData] st_filter: ^BOOL(NSDictionary *item) {
 		return [item isNotEqualTo: stateToRemove.dictionaryRepresentation];
 	}];
 	[self setArtboardStatesData: statesToKeep];
 	// 2) Remove this state's metadata from layers
 	[[self children] enumerateObjectsUsingBlock: ^(id<STLayer> layer, NSUInteger idx, BOOL *stop) {
 		NSDictionary *metadata = [self metadataForLayer: layer];
-		NSArray *keysToKeep = [metadata.allKeys rd_filter: ^BOOL(NSString *key) {
+		NSArray *keysToKeep = [metadata.allKeys st_filter: ^BOOL(NSString *key) {
 			return [key isNotEqualTo: stateToRemove.UUID.UUIDString];
 		}];
 		[self setMedatada: [metadata dictionaryWithValuesForKeys: keysToKeep] forLayer: layer];
@@ -210,7 +210,7 @@
 
 - (NSArray <STStateDescription *> *)allStates
 {
-	return [[self artboardStatesData] rd_map: ^STStateDescription *(NSDictionary *model) {
+	return [[self artboardStatesData] st_map: ^STStateDescription *(NSDictionary *model) {
 		return [[STStateDescription alloc] initWithDictionary: model];
 	}];
 }
@@ -237,7 +237,7 @@
 
 - (void)setAllStates: (NSArray<STStateDescription *> *)allStates
 {
-	NSArray *rawStates = [allStates rd_map: ^NSDictionary *(STStateDescription *state) {
+	NSArray *rawStates = [allStates st_map: ^NSDictionary *(STStateDescription *state) {
 		return [state dictionaryRepresentation];
 	}];
 	[self setArtboardStatesData: rawStates];
