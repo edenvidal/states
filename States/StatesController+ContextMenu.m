@@ -28,7 +28,7 @@
 	if (selectedStates.count == 0) {
 		return;
 	}
-	
+
 	STStateDescription *clickedState = _artboard.allStates[clickedRow];
 	if (![selectedStates containsObject: clickedState]) {
 		selectedStates = [selectedStates arrayByAddingObject: clickedState];
