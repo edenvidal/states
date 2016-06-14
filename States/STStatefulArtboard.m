@@ -120,7 +120,6 @@
 {
 	NSParameterAssert([self.allStates containsObject: state]);
 
-	// XXX
 	[[self children] enumerateObjectsUsingBlock: ^(id<STLayer> layer, NSUInteger idx, BOOL *stop) {
 		NSDictionary *metadata = [self metadataForLayer: layer][state.UUID.UUIDString];
 		if (metadata.count == 0) {
@@ -139,7 +138,6 @@
 	STStateDescription *state = self.currentState;
 	NSParameterAssert(self.currentState != nil);
 
-	// XXX
 	[[self children] enumerateObjectsUsingBlock: ^(id<STLayer> layer, NSUInteger idx, BOOL *stop) {
 		NSMutableDictionary *newMetadata = [[self metadataForLayer: layer] mutableCopy];
 		STLayerState *layerState = [STLayerStateFetcher fetchStateFromLayer: layer];

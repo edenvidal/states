@@ -8,6 +8,7 @@
 
 #import "StatesController.h"
 
+/// A category that builds a context menu for selected rows
 @interface StatesController (ContextMenu) <NSMenuDelegate>
 
 - (void)menuNeedsUpdate: (NSMenu *)menu;

@@ -8,6 +8,6 @@
 
 @import Cocoa;
 
+/// A panel which is movable by its background
 @interface STWindow : NSPanel
-
 @end

@@ -8,6 +8,7 @@
 
 #import "STColorFactory.h"
 #import "STTableRowView.h"
+#import "STTableCellView.h"
 
 @interface STTableRowView()
 @property (readwrite, weak) NSTableView *tableView;
@@ -15,7 +16,7 @@
 
 @implementation STTableRowView
 
-- (instancetype)initWithTableView:(NSTableView *)containingTableView
+- (instancetype)initWithTableView: (NSTableView *)containingTableView
 {
 	if ((self = [super initWithFrame: NSZeroRect])) {
 		_tableView = containingTableView;
@@ -23,7 +24,7 @@
 	return self;
 }
 
-- (void)drawBackgroundInRect:(NSRect)dirtyRect
+- (void)drawBackgroundInRect: (NSRect)dirtyRect
 {
 	[super drawBackgroundInRect: dirtyRect];
 	NSInteger row = [self.tableView rowForView: self];

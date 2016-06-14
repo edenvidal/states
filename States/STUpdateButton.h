@@ -8,8 +8,9 @@
 
 @import Cocoa;
 
-typedef void(^STUpdateButtonAnimationCompletion)(void);
+typedef void (^STUpdateButtonAnimationCompletion)(void);
 
+/// A simple button that may rotate its image clockwise
 @interface STUpdateButton : NSButton
 
 - (void)spinWithCompletion: (STUpdateButtonAnimationCompletion)completion;

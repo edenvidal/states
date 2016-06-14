@@ -11,16 +11,16 @@
 #import "STTableRowView.h"
 #import "STColorFactory.h"
 #import "STTableCellView.h"
+#import "NSArray+Indexes.h"
 #import "STStatefulArtboard.h"
 #import "StatesController.h"
 #import "StatesController+Naming.h"
 #import "StatesController+Decisions.h"
+#import "StatesController+DragNDrop.h"
 #import "StatesController+ContextMenu.h"
 
-static NSString * const kStatesControllerDraggedType = @"StatesControllerDraggedType";
-
 @interface StatesController()
-<SketchNotificationsListener, NSTextFieldDelegate, STTextFieldFirstResponderDelegate>
+<SketchNotificationsListener, STTextFieldFirstResponderDelegate, STTableCellViewDelegate>
 @end
 
 @implementation StatesController
@@ -46,7 +46,7 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	[(NSPanel *)self.window setWorksWhenModal: NO];
 	[(NSPanel *)self.window setFloatingPanel: YES];
 
-	/// NOTE: these two images came from Sketch's own Resources
+	/// NOTE: these two images are from Sketch
 	self.addNewStateButton.image = [NSImage imageNamed: @"pages_add"];
 	self.addNewStateButton.alternateImage = [NSImage imageNamed: @"pages_add_pressed"];
 	self.addNewStateButton.toolTip = @"Add a new state which will reflect the current artboard parameters";
@@ -55,7 +55,7 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	self.tableView.menu.delegate = self;
 	self.tableView.action = @selector(singleClicked:);
 	self.tableView.doubleAction = @selector(doubleClicked:);
-	[self.tableView registerForDraggedTypes: @[kStatesControllerDraggedType]];
+	[self registerTableViewForDragNDrop];
 
 	[self resetArtboard: [STSketch currentArtboard]];
 }
@@ -106,7 +106,7 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 - (void)resetDirtyMarkOnStates
 {
-	// Show an update button if needed
+	// Show or hide an update button depending on a situation
 	[_artboard.allStates enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
 		STTableCellView *cell = [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
 		if ([state isEqualTo: _artboard.currentState] && ([self.tableView editedRow] != idx)) {
@@ -115,6 +115,22 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 			cell.updateButton.animator.hidden = YES;
 		}
 	}];
+}
+
+#pragma mark - STTableCellViewDelegate
+
+- (BOOL)cellViewRepresentsCurrentItem: (STTableCellView *)cellView
+{
+	NSInteger idx = [_artboard.allStates indexOfObject: _artboard.currentState];
+	if (!_artboard || idx == NSNotFound) {
+		return NO;
+	}
+	return cellView == [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
+}
+
+- (BOOL)isSingleRowSelected
+{
+	return [self.tableView selectedRowIndexes].count == 1;
 }
 
 #pragma mark - User Actions
@@ -132,7 +148,10 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 						  withAnimation: NSTableViewAnimationEffectFade];
 	// No need to ask user about switching, since the settings are already saved in this new state
 	[self.tableView selectRowIndexes: [NSIndexSet indexSetWithIndex: newIndex] byExtendingSelection: NO];
-	// HACK: avoid re-apply the same artboard properties which can take a lot of time on big artboards
+	// HACK: we avoid re-apply the same artboard properties again which can take a lot of time on big
+	// artboards by setting the current state directly instead of calling -applyState:.
+	// This is a workaround and should be removed as soon as we find a proper solution to our
+	// performance issues
 	[_artboard setCurrentState: state];
 	[self resetDirtyMarkOnStates];
 	// Move focus to the row to allow user to immdiately change the title value
@@ -146,49 +165,62 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 	STTableCellView *cell = [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
 
+	// Animations first!
 	__block BOOL animationCompleted = NO;
 	[cell.updateButton spinWithCompletion: ^{
 		[self resetDirtyMarkOnStates];
 		animationCompleted = YES;
 	}];
-
+	// Then actually update the model
 	[_artboard updateCurrentState];
-	
+	// Finally we double check that the update button may be hiden safely
 	if (animationCompleted) {
 		[self resetDirtyMarkOnStates];
 	}
 }
 
-- (IBAction)duplicateState: (NSMenuItem *)sender
+- (IBAction)duplicateStates: (NSMenuItem *)sender
 {
-	STStateDescription *original = sender.representedObject;
-	NSParameterAssert(original != nil);
-
-	NSString *duplicateTitle = [NSString stringWithFormat: @"%@ copy", original.title];
-	STStateDescription *duplicate = [[STStateDescription alloc] initWithTitle: duplicateTitle];
-
-	[_artboard insertNewState: duplicate];
-	[_artboard copyState: original toState: duplicate];
-
-	// Update the table view
-	NSInteger newIndex = _artboard.allStates.count-1;
-	[self.tableView insertRowsAtIndexes: [NSIndexSet indexSetWithIndex: newIndex]
+	NSArray <STStateDescription *> *originals = sender.representedObject;
+	NSParameterAssert([originals isKindOfClass: [NSArray class]]);
+	// Create a copy for every original state passed by sender
+	[originals enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
+		NSString *duplicateTitle = [NSString stringWithFormat: @"%@ copy", state.title];
+		STStateDescription *duplicate = [[STStateDescription alloc] initWithTitle: duplicateTitle];
+		[_artboard insertNewState: duplicate];
+		[_artboard copyState: state toState: duplicate];
+	}];
+	// Update the table view to reveal this new states
+	NSRange newStatesRange = NSMakeRange(_artboard.allStates.count-1, originals.count);
+	NSIndexSet *newIndexes = [NSIndexSet indexSetWithIndexesInRange: newStatesRange];
+	[self.tableView insertRowsAtIndexes: newIndexes
 						  withAnimation: NSTableViewAnimationEffectFade];
 }
 
-- (IBAction)deleteState: (NSMenuItem *)sender
+- (void)createPageFromStates: (NSMenuItem *)sender
 {
-	STStateDescription *stateToDelete = sender.representedObject;
-	NSParameterAssert(stateToDelete != nil);
-	NSParameterAssert([stateToDelete isNotEqualTo: _artboard.defaultState]);
+	NSAssert(NO, @"Not Implemented Yet");
+}
 
-	if (![self shoulRemoveState: stateToDelete]) {
+- (IBAction)deleteStates: (NSMenuItem *)sender
+{
+	NSMutableArray <STStateDescription *> *statesToDelete = [sender.representedObject mutableCopy];
+	NSParameterAssert([statesToDelete isKindOfClass: [NSArray class]]);
+
+	// We can not remove the default state so just remove if from the proposed set of states
+	[statesToDelete removeObject: _artboard.defaultState];
+
+	if (![self shoulRemoveStates: statesToDelete]) {
 		return;
 	}
-	NSInteger idx = [_artboard.allStates indexOfObject: stateToDelete];
-	[_artboard removeState: stateToDelete];
-	[self.tableView removeRowsAtIndexes: [NSIndexSet indexSetWithIndex: idx]
-						  withAnimation: NSTableViewAnimationEffectFade];
+	NSIndexSet *indexesToDelete = [_artboard.allStates rd_indexesOfObjects: statesToDelete];
+	// 1) remove states from data model
+	[statesToDelete enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
+		[_artboard removeState: state];
+	}];
+	// 2) remove corresponding rows from table view
+	[self.tableView removeRowsAtIndexes: indexesToDelete withAnimation: NSTableViewAnimationEffectFade];
+	// 3) update table view selection
 	NSInteger newCurrentState = [_artboard.allStates indexOfObject: _artboard.currentState];
 	if (newCurrentState != NSNotFound) {
 		[self.tableView selectRowIndexes: [NSIndexSet indexSetWithIndex: newCurrentState]
@@ -196,8 +228,14 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	}
 }
 
+/// Single click switches current state
 - (void)singleClicked: (id)sender
 {
+	// Ignore clicks when multiple rows are selected
+	if ([self.tableView selectedRowIndexes].count > 1) {
+		return;
+	}
+
 	NSInteger row = [self.tableView clickedRow];
 	if (row < 0 || row >= _artboard.allStates.count) {
 		return;
@@ -221,8 +259,14 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	}
 }
 
+/// Double click makes a state title text fiels editable
 - (void)doubleClicked: (id)sender
 {
+	// Ignore clicks when multiple rows are selected
+	if ([self.tableView selectedRowIndexes].count > 1) {
+		return;
+	}
+
 	NSInteger row = [self.tableView clickedRow];
 	if (row < 0 || row >= _artboard.allStates.count) {
 		return;
@@ -242,17 +286,19 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 	NSString *newTitle = [[editor string] stringByTrimmingCharactersInSet:
 						  [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	// We either commit the change or just reset the row if user input is invalid
 	if (newTitle.length > 0) {
 		[_artboard updateName: newTitle forState: _artboard.allStates[updatedRow]];
 	} else {
 		[self.tableView reloadDataForRowIndexes: [NSIndexSet indexSetWithIndex: updatedRow]
 								  columnIndexes: [NSIndexSet indexSetWithIndex: 0]];
 	}
+	// Don't forget about the update button we've hidden
 	[self resetDirtyMarkOnStates];
 }
 
-/// XXX
-- (void)textFieldBecomeFirstResponder:(NSTextField *)textField
+/// Hide an update button when a state title is being edited
+- (void)textFieldBecomeFirstResponder: (NSTextField *)textField
 {
 	NSInteger row = [self.tableView rowForView: textField];
 	if (row < 0 || row >= _artboard.allStates.count) {
@@ -279,14 +325,15 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	if (!cellView) {
 		return nil;
 	}
-	// XXX
+	cellView.delegate = self;
+	// Setup text field
 	cellView.textField.stringValue = state.title;
 	cellView.textField.delegate = self;
 	((STTextField *)cellView.textField).firstResponderDelegate = self;
-	// XXX
+	// Setup update button
 	cellView.updateButton.action = @selector(updateCurrentState:);
 	cellView.updateButton.target = self;
-	// XXX
+	// Toggle update button's visibility
 	if ([[tableView selectedRowIndexes] containsIndex: row]) {
 		cellView.updateButton.hidden = [_artboard conformsToState: state];
 	} else {
@@ -297,15 +344,62 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 
 #pragma mark Selection Filter
 
-- (BOOL)tableView: (NSTableView *)tableView shouldSelectRow: (NSInteger)row
+- (NSIndexSet *)tableView: (NSTableView *)tableView selectionIndexesForProposedSelection: (NSIndexSet *)proposedSelectionIndexes
 {
-	NSInteger previouslySelectedRow = [tableView selectedRow];
-	if (previouslySelectedRow == -1) {
-		return YES;
+	// Don't allow table view to reset selection automatically from multiple rows to "nothing". In
+	// this case it will select the last row which may not represent the current state
+	if ([tableView selectedRowIndexes].count > 1 && proposedSelectionIndexes.count == 0) {
+		NSInteger currentRow = [_artboard.allStates indexOfObject: _artboard.currentState];
+		if (currentRow != NSNotFound) {
+			return [NSIndexSet indexSetWithIndex: currentRow];
+		} else {
+			return [NSIndexSet indexSet];
+		}
 	}
-	STStateDescription *oldState = _artboard.allStates[previouslySelectedRow];
-	STStateDescription *newState = _artboard.allStates[row];
-	return [self shouldSwitchToState: newState fromState: oldState];
+	// Redraw the already selected row when we're dropping multiselection to just this one row
+	if ([tableView selectedRowIndexes].count > 1 && proposedSelectionIndexes.count == 1) {
+		STStateDescription *newState = _artboard.allStates[proposedSelectionIndexes.firstIndex];
+		if (![self shouldSwitchToState: newState fromState: _artboard.currentState]) {
+			return [NSIndexSet indexSet];
+		}
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+									 (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(),
+		^{
+			[self.tableView rowViewAtRow: proposedSelectionIndexes.firstIndex
+						 makeIfNecessary: NO].needsDisplay = YES;
+		});
+		return proposedSelectionIndexes;
+	}
+
+	// Always allow to expand selection. Note that we don't switch states in this case
+	if (proposedSelectionIndexes.count > 1) {
+		return proposedSelectionIndexes;
+	}
+	// Always allow initial selection
+	if (self.tableView.selectedRowIndexes.count == 0) {
+		return proposedSelectionIndexes;
+	}
+	// Don't allow to drop selection from one row to zero
+	if (proposedSelectionIndexes.count == 0) {
+		return [NSIndexSet indexSet];
+	}
+	// So we're switching from one state to another; ask user about this
+	STStateDescription *oldState = _artboard.allStates[tableView.selectedRowIndexes.firstIndex];
+	STStateDescription *newState = _artboard.allStates[proposedSelectionIndexes.firstIndex];
+	if ([self shouldSwitchToState: newState fromState: oldState]) {
+		return proposedSelectionIndexes;
+	}
+
+	return [NSIndexSet indexSet];
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+	// Update cell views for current selection state (e.g. set text color, etc)
+	[_artboard.allStates enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL * stop) {
+		NSTableCellView *view = [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
+		view.backgroundStyle = view.backgroundStyle;
+	}];
 }
 
 #pragma mark Row Coloring
@@ -315,44 +409,4 @@ static NSString * const kStatesControllerDraggedType = @"StatesControllerDragged
 	return [[STTableRowView alloc] initWithTableView: tableView];
 }
 
-#pragma mark Drag'n'Drop
-
-- (BOOL)tableView: (NSTableView *)tableView writeRowsWithIndexes: (NSIndexSet *)rowIndexes toPasteboard: (NSPasteboard *)pboard
-{
-	NSData *indexesData = [NSKeyedArchiver archivedDataWithRootObject: rowIndexes];
-	[pboard declareTypes: @[kStatesControllerDraggedType] owner: self];
-	[pboard setData: indexesData forType: kStatesControllerDraggedType];
-	return YES;
-}
-
-- (NSDragOperation)tableView: (NSTableView *)tableView validateDrop: (id <NSDraggingInfo>)info proposedRow: (NSInteger)row proposedDropOperation: (NSTableViewDropOperation)dropOperation
-{
-	if (dropOperation == NSTableViewDropAbove) {
-		[info setAnimatesToDestination: YES];
-		return NSDragOperationMove;
-	}
-	return NSDragOperationNone;
-}
-
-- (BOOL)tableView: (NSTableView *)tableView acceptDrop: (id <NSDraggingInfo>)info row: (NSInteger)row dropOperation: (NSTableViewDropOperation)dropOperation
-{
-	NSData *data = [[info draggingPasteboard] dataForType: kStatesControllerDraggedType];
-	NSIndexSet *sourceIndexes = [NSKeyedUnarchiver unarchiveObjectWithData: data];
-	//
-	// FIXME: support dragging multiple items
-	//
-	NSUInteger destination = MIN(MAX(row, 0), _artboard.allStates.count-1);
-	NSMutableArray *states = [_artboard.allStates mutableCopy];
-	NSUInteger source = sourceIndexes.firstIndex;
-
-	// 1) model updates
-	id draggedState = [states objectAtIndex: source];
-	[states removeObjectAtIndex: source];
-	[states insertObject: draggedState atIndex: destination];
-	[_artboard reorderStates: states];
-	// 2) table view updates
-	[tableView moveRowAtIndex: source toIndex: destination];
-
-	return YES;
-}
 @end

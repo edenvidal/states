@@ -13,7 +13,7 @@
 - (void)textFieldBecomeFirstResponder: (NSTextField *)textField;
 @end
 
-/// XXX
+/// A text field that notifies its delegate that it has became firt responder
 @interface STTextField : NSTextField
 
 @property (weak) id <STTextFieldFirstResponderDelegate> firstResponderDelegate;

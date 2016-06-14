@@ -30,6 +30,8 @@
 		0AC4CD941D0BE52300829E45 /* NSArray+HigherOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4CD931D0BE52300829E45 /* NSArray+HigherOrder.m */; };
 		0AD7BE051CFDE548003C77BB /* StatesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD7BE041CFDE548003C77BB /* StatesController.m */; };
 		0AD7BE0B1CFDF088003C77BB /* StatesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AD7BE0A1CFDF088003C77BB /* StatesWindow.xib */; };
+		0AE014F61D0EA24C00F39C32 /* NSArray+Indexes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE014F51D0EA24C00F39C32 /* NSArray+Indexes.m */; };
+		0AE014F91D0EB3EA00F39C32 /* StatesController+DragNDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE014F81D0EB3EA00F39C32 /* StatesController+DragNDrop.m */; };
 		0AE8BF421D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8BF411D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +89,10 @@
 		0AD7BE041CFDE548003C77BB /* StatesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StatesController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AD7BE081CFDE680003C77BB /* plugin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; lineEnding = 0; path = plugin.js; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		0AD7BE0A1CFDF088003C77BB /* StatesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatesWindow.xib; sourceTree = "<group>"; };
+		0AE014F41D0EA24C00F39C32 /* NSArray+Indexes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Indexes.h"; sourceTree = "<group>"; };
+		0AE014F51D0EA24C00F39C32 /* NSArray+Indexes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Indexes.m"; sourceTree = "<group>"; };
+		0AE014F71D0EB3EA00F39C32 /* StatesController+DragNDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StatesController+DragNDrop.h"; sourceTree = "<group>"; };
+		0AE014F81D0EB3EA00F39C32 /* StatesController+DragNDrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StatesController+DragNDrop.m"; sourceTree = "<group>"; };
 		0AE8BF401D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "STStatefulArtboard+Backend.h"; sourceTree = "<group>"; };
 		0AE8BF411D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "STStatefulArtboard+Backend.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +244,8 @@
 				0A3CEE751D055C5E008A4BB0 /* StatesController+Decisions.m */,
 				0A3CEE771D05693E008A4BB0 /* StatesController+ContextMenu.h */,
 				0A3CEE781D05693E008A4BB0 /* StatesController+ContextMenu.m */,
+				0AE014F71D0EB3EA00F39C32 /* StatesController+DragNDrop.h */,
+				0AE014F81D0EB3EA00F39C32 /* StatesController+DragNDrop.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -256,6 +264,8 @@
 			children = (
 				0AC4CD921D0BE52300829E45 /* NSArray+HigherOrder.h */,
 				0AC4CD931D0BE52300829E45 /* NSArray+HigherOrder.m */,
+				0AE014F41D0EA24C00F39C32 /* NSArray+Indexes.h */,
+				0AE014F51D0EA24C00F39C32 /* NSArray+Indexes.m */,
 			);
 			name = Helpers;
 			path = States;
@@ -362,7 +372,9 @@
 				0AAB1C5B1CFF3D56006512AF /* STStateDescription.m in Sources */,
 				0AE8BF421D02FC6E00E0C4A8 /* STStatefulArtboard+Backend.m in Sources */,
 				0AAB1C5E1CFF40CA006512AF /* STStatefulArtboard.m in Sources */,
+				0AE014F91D0EB3EA00F39C32 /* StatesController+DragNDrop.m in Sources */,
 				0A4BDCBA1CFED17200D3584F /* STSketchPluginContext.m in Sources */,
+				0AE014F61D0EA24C00F39C32 /* NSArray+Indexes.m in Sources */,
 				0AB737AC1D04512600E79D3D /* STTableView.m in Sources */,
 				0A9C85941D0B001B00231073 /* STPlaceholderView.m in Sources */,
 				0A7160F31D09279C008A3F78 /* STUpdateButton.m in Sources */,

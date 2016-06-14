@@ -19,7 +19,7 @@
 	return result;
 }
 
-- (NSArray *)rd_filter:(BOOL (^)(id))block
+- (NSArray *)rd_filter: (BOOL (^)(id))block
 {
 	NSMutableArray *new = [NSMutableArray array];
 	[self enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {

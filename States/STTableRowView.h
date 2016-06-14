@@ -8,7 +8,7 @@
 
 @import Cocoa;
 
-/// XXX
+/// A row view that draws custom background and selection rectangles
 @interface STTableRowView : NSTableRowView
 
 @property (readonly, weak) NSTableView *tableView;

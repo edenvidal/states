@@ -8,6 +8,6 @@
 
 @import Cocoa;
 
+/// A simple placeholder view that covers the main table view when there's no artboard selected
 @interface STPlaceholderView : NSView
-
 @end

@@ -64,7 +64,9 @@
 
 + (instancetype)pluginContext
 {
-	return objc_getAssociatedObject(self, @selector(pluginContext));
+	id context = objc_getAssociatedObject(self, @selector(pluginContext));
+	NSAssert(context != nil, @"You must set pluginContext via [%@ setPluginContext:] method before calling any other methods of this class", [self class]);
+	return context;
 }
 
 #pragma mark -

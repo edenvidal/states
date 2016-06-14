@@ -8,6 +8,7 @@
 
 @import Cocoa;
 
+/// Keeps all of the custom colors for this project
 @interface STColorFactory : NSObject
 
 // Table View Colors
@@ -21,6 +22,12 @@
 + (NSColor *)secondaryTableViewRowColor;
 
 + (NSColor *)tableViewBackgroundColor;
+
++ (NSColor *)tableViewCellTextRegularColor;
+
++ (NSColor *)tableViewCellTextSelectedColorWithAlpha: (CGFloat)alpha;
+
++ (NSColor *)tableViewCellTextInactiveSelectedColorWithAlpha: (CGFloat)alpha;
 
 // Header Colors
 

@@ -15,45 +15,81 @@
 - (void)menuNeedsUpdate: (NSMenu *)menu
 {
 	[menu removeAllItems];
+	// TODO: remove as soon as -createPageFromStates is implemened
+	menu.autoenablesItems = NO;
 
 	NSInteger clickedRow = [self.tableView clickedRow];
 	if (clickedRow < 0 || clickedRow >= _artboard.allStates.count) {
 		return;
 	}
 
-	STStateDescription *state = _artboard.allStates[clickedRow];
-	// TODO: add support for updating non-current states as well. Need to figure out
+	NSArray <STStateDescription *>*selectedStates = [_artboard.allStates objectsAtIndexes:
+													 [self.tableView selectedRowIndexes]];
+	if (selectedStates.count == 0) {
+		return;
+	}
+
+	STStateDescription *clickedState = _artboard.allStates[clickedRow];
+	if (![selectedStates containsObject: clickedState]) {
+		selectedStates = [selectedStates arrayByAddingObject: clickedState];
+	}
+
+	// TODO?: add support for updating non-current states as well. Need to figure out
 	// when "updating" them means though. Maybe just rewriting them to reflect current artboard properties?
-	if ([state isEqual: _artboard.currentState]) {
-		NSMenuItem *updateItem = [[NSMenuItem alloc] initWithTitle: @"Update"
-															action: @selector(updateCurrentState:) keyEquivalent: @""];
-		updateItem.target = self;
-		updateItem.representedObject = state;
-		[menu addItem: updateItem];
+	if (selectedStates.count == 1 && [clickedState isEqualTo: _artboard.currentState]) {
+		[menu addItem: [self updateCurrentStateMenuItem]];
 	}
 
-	NSMenuItem *duplicateItem = [[NSMenuItem alloc] initWithTitle: @"Duplicate"
-														   action: @selector(duplicateState:) keyEquivalent: @""];
-	duplicateItem.target = self;
-	duplicateItem.representedObject = state;
-	[menu addItem: duplicateItem];
-
-	// TODO: implement this one
-	//	NSMenuItem *createPageItem = [[NSMenuItem alloc] initWithTitle: @"Create Page"
-	//															action: nil keyEquivalent: @""];
-	//	createPageItem.target = self;
-	//	createPageItem.representedObject = state;
-	//	createPageItem.enabled = NO; // FIXME: see TODO above
-	//	[menu addItem: createPageItem];
-
-	if ([state isNotEqualTo: _artboard.defaultState]) {
-		NSMenuItem *deleteItem = [[NSMenuItem alloc] initWithTitle: @"Delete"
-															action: @selector(deleteState:) keyEquivalent: @""];
-		deleteItem.target = self;
-		deleteItem.representedObject = state;
+	[menu addItem: [self duplicateMenuItemForStates: selectedStates]];
+	[menu addItem: [NSMenuItem separatorItem]];
+	[menu addItem: [self createPageMenuItemForStates: selectedStates]];
+	if (selectedStates.count > 1 || [selectedStates.firstObject isNotEqualTo: _artboard.defaultState]) {
 		[menu addItem: [NSMenuItem separatorItem]];
-		[menu addItem: deleteItem];
+		[menu addItem: [self deleteMenuItemForStates: selectedStates]];
 	}
+}
+
+#pragma mark Menu Items
+
+- (NSMenuItem *)updateCurrentStateMenuItem
+{
+	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle: @"Update"
+												  action: @selector(updateCurrentState:)
+										   keyEquivalent: @""];
+	item.target = self;
+	return item;
+}
+
+- (NSMenuItem *)duplicateMenuItemForStates: (NSArray <STStateDescription *> *)subjects
+{
+	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle: @"Duplicate"
+												  action: @selector(duplicateStates:)
+										   keyEquivalent: @""];
+	item.target = self;
+	item.representedObject = subjects;
+	return item;
+}
+
+- (NSMenuItem *)createPageMenuItemForStates: (NSArray <STStateDescription *> *)subjects
+{
+	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle: @"Create Page"
+												  action: @selector(createPageFromStates:)
+										   keyEquivalent: @""];
+	// TODO: enable it as soon as -createPageFromStates is implemened
+	item.enabled = NO;
+	item.target = self;
+	item.representedObject = subjects;
+	return item;
+}
+
+- (NSMenuItem *)deleteMenuItemForStates: (NSArray <STStateDescription *> *)subjects
+{
+	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle: @"Delete"
+												  action: @selector(deleteStates:)
+										   keyEquivalent: @""];
+	item.target = self;
+	item.representedObject = subjects;
+	return item;
 }
 
 @end
