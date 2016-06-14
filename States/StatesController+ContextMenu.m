@@ -39,8 +39,10 @@
 	[menu addItem: [self duplicateMenuItemForStates: selectedStates]];
 	[menu addItem: [NSMenuItem separatorItem]];
 	[menu addItem: [self createPageMenuItemForStates: selectedStates]];
-	[menu addItem: [NSMenuItem separatorItem]];
-	[menu addItem: [self deleteMenuItemForStates: selectedStates]];
+	if (selectedStates.count > 1 || [selectedStates.firstObject isNotEqualTo: _artboard.defaultState]) {
+		[menu addItem: [NSMenuItem separatorItem]];
+		[menu addItem: [self deleteMenuItemForStates: selectedStates]];
+	}
 }
 
 #pragma mark Menu Items
