@@ -1,10 +1,9 @@
+// STCommand.h
+// Copyright (c) 2016 Eden Vidal
 //
-//  STCommand.h
-//  States
-//
-//  Created by Dmitry Rodionov on 01/06/16.
-//  Copyright © 2016 Internals Exposed. All rights reserved.
-//
+// This software may be modified and distributed under the terms
+// of the MIT license.  See the LICENSE file for details.
+
 
 @import Foundation;
 #import "STLayer.h"
