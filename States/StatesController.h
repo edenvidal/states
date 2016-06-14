@@ -12,12 +12,13 @@
 @class STUpdateButton;
 @class STTableCellView;
 
-/// Well, well, well. Here you are, looking for a big fish. This one is responsible for managing
-/// the states table view and responding to user's actions by modifing current artboard.
+/// So here you are, looking for a challenge. This one is responsible for managing the states
+/// table view and responding to user's actions by modifing current artboard.
 ///
-/// It's huge and ungly. But I did my bext to make this controller as stateless (such irony!) as
+/// It's huge and ungly. But I tried my best to make this controller as stateless (such irony!) as
 /// possible so at least one could easily refactor different bits into separate classes 🌟
-@interface StatesController : NSWindowController <NSTableViewDelegate, NSTableViewDataSource>
+@interface StatesController : NSWindowController
+<NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate>
 {
 @protected
 	STStatefulArtboard *_artboard;

@@ -20,8 +20,7 @@
 #import "StatesController+ContextMenu.h"
 
 @interface StatesController()
-<SketchNotificationsListener, NSTextFieldDelegate, STTextFieldFirstResponderDelegate,
-STTableCellViewDelegate>
+<SketchNotificationsListener, STTextFieldFirstResponderDelegate, STTableCellViewDelegate>
 @end
 
 @implementation StatesController
@@ -47,7 +46,7 @@ STTableCellViewDelegate>
 	[(NSPanel *)self.window setWorksWhenModal: NO];
 	[(NSPanel *)self.window setFloatingPanel: YES];
 
-	/// NOTE: these two images came from Sketch's own Resources
+	/// NOTE: these two images are from Sketch
 	self.addNewStateButton.image = [NSImage imageNamed: @"pages_add"];
 	self.addNewStateButton.alternateImage = [NSImage imageNamed: @"pages_add_pressed"];
 	self.addNewStateButton.toolTip = @"Add a new state which will reflect the current artboard parameters";
@@ -107,7 +106,7 @@ STTableCellViewDelegate>
 
 - (void)resetDirtyMarkOnStates
 {
-	// Show an update button if needed
+	// Show or hide an update button depending on a situation
 	[_artboard.allStates enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
 		STTableCellView *cell = [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
 		if ([state isEqualTo: _artboard.currentState] && ([self.tableView editedRow] != idx)) {
@@ -149,7 +148,10 @@ STTableCellViewDelegate>
 						  withAnimation: NSTableViewAnimationEffectFade];
 	// No need to ask user about switching, since the settings are already saved in this new state
 	[self.tableView selectRowIndexes: [NSIndexSet indexSetWithIndex: newIndex] byExtendingSelection: NO];
-	// HACK: avoid re-apply the same artboard properties which can take a lot of time on big artboards
+	// HACK: we avoid re-apply the same artboard properties again which can take a lot of time on big
+	// artboards by setting the current state directly instead of calling -applyState:.
+	// This is a workaround and should be removed as soon as we find a proper solution to our
+	// performance issues
 	[_artboard setCurrentState: state];
 	[self resetDirtyMarkOnStates];
 	// Move focus to the row to allow user to immdiately change the title value
@@ -163,14 +165,15 @@ STTableCellViewDelegate>
 
 	STTableCellView *cell = [self.tableView viewAtColumn: 0 row: idx makeIfNecessary: NO];
 
+	// Animations first!
 	__block BOOL animationCompleted = NO;
 	[cell.updateButton spinWithCompletion: ^{
 		[self resetDirtyMarkOnStates];
 		animationCompleted = YES;
 	}];
-
+	// Then actually update the model
 	[_artboard updateCurrentState];
-	
+	// Finally we double check that the update button may be hiden safely
 	if (animationCompleted) {
 		[self resetDirtyMarkOnStates];
 	}
@@ -180,14 +183,14 @@ STTableCellViewDelegate>
 {
 	NSArray <STStateDescription *> *originals = sender.representedObject;
 	NSParameterAssert([originals isKindOfClass: [NSArray class]]);
-
+	// Create a copy for every original state passed by sender
 	[originals enumerateObjectsUsingBlock: ^(STStateDescription *state, NSUInteger idx, BOOL *stop) {
 		NSString *duplicateTitle = [NSString stringWithFormat: @"%@ copy", state.title];
 		STStateDescription *duplicate = [[STStateDescription alloc] initWithTitle: duplicateTitle];
 		[_artboard insertNewState: duplicate];
 		[_artboard copyState: state toState: duplicate];
 	}];
-	// Update the table view
+	// Update the table view to reveal this new states
 	NSRange newStatesRange = NSMakeRange(_artboard.allStates.count-1, originals.count);
 	NSIndexSet *newIndexes = [NSIndexSet indexSetWithIndexesInRange: newStatesRange];
 	[self.tableView insertRowsAtIndexes: newIndexes
@@ -225,6 +228,7 @@ STTableCellViewDelegate>
 	}
 }
 
+/// Single click switches current state
 - (void)singleClicked: (id)sender
 {
 	// Ignore clicks when multiple rows are selected
@@ -255,6 +259,7 @@ STTableCellViewDelegate>
 	}
 }
 
+/// Double click makes a state title text fiels editable
 - (void)doubleClicked: (id)sender
 {
 	// Ignore clicks when multiple rows are selected
@@ -281,12 +286,14 @@ STTableCellViewDelegate>
 
 	NSString *newTitle = [[editor string] stringByTrimmingCharactersInSet:
 						  [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	// We either commit the change or just reset the row if user input is invalid
 	if (newTitle.length > 0) {
 		[_artboard updateName: newTitle forState: _artboard.allStates[updatedRow]];
 	} else {
 		[self.tableView reloadDataForRowIndexes: [NSIndexSet indexSetWithIndex: updatedRow]
 								  columnIndexes: [NSIndexSet indexSetWithIndex: 0]];
 	}
+	// Don't forget about the update button we've hidden
 	[self resetDirtyMarkOnStates];
 }
 
