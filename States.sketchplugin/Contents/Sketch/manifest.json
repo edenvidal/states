@@ -3,12 +3,12 @@
 	"description": "Create different artboard states and switch between them easily",
 	"author": "Eden Vidal",
 	"homepage": "http://edenvidal.com",
-	"version": 0.100,
+	"version": 0.97,
 	"identifier": "com.edenvidal.states-for-sketch",
 	"compatibleVersion": 3,
 	"bundleVersion": 1,
 	"commands": [{
-		"name": "Show States of Artboard",
+		"name": "Show States",
 		"identifier": "show-states",
 		"script": "plugin.js",
 		"handler": "showStatesWindow"
