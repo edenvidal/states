@@ -6,12 +6,17 @@
 
 @import Foundation;
 
+@protocol STAbsoluteRect;
+
 @protocol STLayer <NSObject>
 @optional
 
 - (BOOL)isVisible;
 - (void)setIsVisible: (BOOL)visible;
-- (id)absoluteRect;
+- (id <STAbsoluteRect>)absoluteRect;
+
+- (void)copyToLayer: (id <STLayer>)newParent beforeLayer: (id <STLayer>)sibling;
+
 @end
 
 @protocol STFrame <NSObject>
@@ -21,6 +26,16 @@
 
 - (CGFloat)x;
 - (CGFloat)y;
+
+- (void)setX: (CGFloat)x;
+- (void)setY: (CGFloat)y;
+
+@end
+
+@protocol STAbsoluteRect <NSObject>
+@optional
+
+- (CGRect)absoluteRect;
 
 - (void)setX: (CGFloat)x;
 - (void)setY: (CGFloat)y;

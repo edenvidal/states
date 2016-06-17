@@ -28,4 +28,13 @@
 	return newName;
 }
 
+- (NSString *)pageNameForStates: (NSArray <STStateDescription *> *)states
+{
+	NSString *titles = [[states st_map: ^NSString *(STStateDescription *state) {
+		return state.title;
+	}] componentsJoinedByString: @", "];
+
+	return [NSString stringWithFormat: @"Page for %@", titles];
+}
+
 @end

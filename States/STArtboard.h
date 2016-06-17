@@ -13,4 +13,9 @@
 
 - (NSArray <id <STLayer>>*)children;
 
+- (void)setName: (NSString *)name;
+- (NSString *)name;
+
+- (instancetype)copy;
+
 @end
