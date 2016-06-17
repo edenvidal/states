@@ -206,7 +206,7 @@
 	// 1) Create a new page
 	id <STPage> currentPage = [STSketch currentPage];
 	id <STPage> newPage = [NSClassFromString(@"MSPage") page];
-	newPage.name = [self pageNameForStates: selectedStates];
+	newPage.name = [self pageNameForStates: selectedStates sourcePage: currentPage];
 	newPage.pageDelegate = currentPage.pageDelegate;
 	newPage.grid = currentPage.grid;
 	newPage.layout = currentPage.layout;

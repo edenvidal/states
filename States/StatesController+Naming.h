@@ -14,6 +14,6 @@
 - (NSString *)newStateNameInStates: (NSArray <STStateDescription *> *)existingStates;
 
 /// Returns a name for a new page containing shapshots of the given states
-- (NSString *)pageNameForStates: (NSArray <STStateDescription *> *)states;
+- (NSString *)pageNameForStates: (NSArray <STStateDescription *> *)states sourcePage: (id <STPage>)sourcePage;
 
 @end
