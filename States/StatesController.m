@@ -4,6 +4,7 @@
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
 
+#import "STPage.h"
 #import "STSketch.h"
 #import "STTextField.h"
 #import "STTableRowView.h"
@@ -11,6 +12,8 @@
 #import "STTableCellView.h"
 #import "NSArray+Indexes.h"
 #import "STStatefulArtboard.h"
+#import "NSArray+HigherOrder.h"
+#import "STStatefulArtboard+Snapshots.h"
 #import "StatesController.h"
 #import "StatesController+Naming.h"
 #import "StatesController+Decisions.h"
@@ -197,7 +200,48 @@
 
 - (void)createPageFromStates: (NSMenuItem *)sender
 {
-	NSAssert(NO, @"Not Implemented Yet");
+	NSArray <STStateDescription *> *selectedStates = sender.representedObject;
+	NSParameterAssert([selectedStates isKindOfClass: [NSArray class]]);
+
+	// 1) Create a new page
+	id <STPage> currentPage = [STSketch currentPage];
+	id <STPage> newPage = [NSClassFromString(@"MSPage") page];
+	NSAssert(newPage != nil, @"+[MSPage page] returned nil. Is this method still available?");
+
+	newPage.name = [self pageNameForStates: selectedStates sourcePage: currentPage];
+	newPage.pageDelegate = currentPage.pageDelegate;
+	newPage.grid = currentPage.grid;
+	newPage.layout = currentPage.layout;
+
+	// 2) for each selected state we create a "snapshot" artboard and copy it to this new page
+	NSArray *artboards = [selectedStates st_map: ^id<STArtboard>(STStateDescription *state) {
+		return [_artboard snapshotForState: state];
+	}];
+	// 2.1) we want these artboards to be aligned in a line with a little space in between items
+	CGFloat gap = 200.f;
+	__block CGPoint location = CGPointZero;
+ 	[artboards enumerateObjectsUsingBlock: ^(id <STArtboard> artboard, NSUInteger idx, BOOL *stop) {
+		if (idx == 0) {
+			location = [[artboard absoluteRect] absoluteRect].origin;
+		}
+		[[artboard absoluteRect] setX: location.x];
+		location.x += [[artboard absoluteRect] absoluteRect].size.width + gap;
+	}];
+	[newPage addLayers: artboards];
+
+	// 3) Insert this new page into the document
+	[[[STSketch currentDocument] documentData] addPage: newPage];
+	// 3.1) adjust scroll and zoom to match the source page
+	newPage.scrollOrigin = currentPage.scrollOrigin;
+	newPage.zoomValue = currentPage.zoomValue;
+	// 3.2) mark this new page as current
+	[STSketch currentDocument].currentPage = newPage;
+
+	// 4) Select the first available artboard on a new page
+	if (newPage.artboards.count > 0) {
+		[[[STSketch currentDocument] documentData] deselectAllLayers];
+		[newPage selectLayers: @[newPage.artboards.firstObject]];
+	}
 }
 
 - (IBAction)deleteStates: (NSMenuItem *)sender

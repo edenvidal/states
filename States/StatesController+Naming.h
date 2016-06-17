@@ -13,4 +13,7 @@
 /// Enumerates names such as "State", "State 1", "State 2" etc and returns the first available one
 - (NSString *)newStateNameInStates: (NSArray <STStateDescription *> *)existingStates;
 
+/// Returns a name for a new page containing shapshots of the given states
+- (NSString *)pageNameForStates: (NSArray <STStateDescription *> *)states sourcePage: (id <STPage>)sourcePage;
+
 @end

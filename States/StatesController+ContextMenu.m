@@ -13,8 +13,6 @@
 - (void)menuNeedsUpdate: (NSMenu *)menu
 {
 	[menu removeAllItems];
-	// TODO: remove as soon as -createPageFromStates is implemened
-	menu.autoenablesItems = NO;
 
 	NSInteger clickedRow = [self.tableView clickedRow];
 	if (clickedRow < 0 || clickedRow >= _artboard.allStates.count) {
@@ -74,8 +72,6 @@
 	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle: @"Create Page"
 												  action: @selector(createPageFromStates:)
 										   keyEquivalent: @""];
-	// TODO: enable it as soon as -createPageFromStates is implemened
-	item.enabled = NO;
 	item.target = self;
 	item.representedObject = subjects;
 	return item;

@@ -4,6 +4,7 @@
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
 
+#import "STPage.h"
 #import "STStateDescription.h"
 #import "NSArray+HigherOrder.h"
 #import "StatesController+Naming.h"
@@ -26,6 +27,16 @@
 	}
 
 	return newName;
+}
+
+- (NSString *)pageNameForStates: (NSArray <STStateDescription *> *)states sourcePage: (id <STPage>)sourcePage;
+{
+	NSString *titles = [[states st_map: ^NSString *(STStateDescription *state) {
+		return state.title;
+	}] componentsJoinedByString: @", "];
+
+	return [NSString stringWithFormat: @"%@ :: %@ [Snapshots for %@]",
+			sourcePage.name, [sourcePage currentArtboard].name, titles];
 }
 
 @end

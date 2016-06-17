@@ -21,12 +21,12 @@
 	if ((self = [super init])) {
 		_internal = artboard;
 		_context = context;
-		[self createDefaultLayerIfNeeded];
+		[self createDefaultStateIfNeeded];
 	}
 	return self;
 }
 
-- (void)createDefaultLayerIfNeeded
+- (void)createDefaultStateIfNeeded
 {
 	if (self.allStates.count > 0) {
 		// Backwards compatibility
@@ -77,9 +77,12 @@
 {
 	[self setArtboardStatesData: @[]];
 	[self setArtboardCurrentStateData: @{}];
+	[self setArtboardDefaultStateData: @{}];
 	[[self children] enumerateObjectsUsingBlock: ^(id<STLayer> layer, NSUInteger idx, BOOL *stop) {
 		[self setMedatada: @{} forLayer: layer];
 	}];
+	// Re-create the initial state
+	[self createDefaultStateIfNeeded];
 }
 
 - (void)removeState: (STStateDescription *)stateToRemove

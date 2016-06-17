@@ -7,10 +7,25 @@
 @import Foundation;
 #import "STPage.h"
 
+@protocol STDocumentData <NSObject>
+
+- (void)addPage: (id <STPage>)page;
+- (void)deselectAllLayers;
+
+@end
+
 @protocol STDocument <NSObject>
 @optional
 
+- (void)setCurrentPage: (id <STPage>)page;
 - (id <STPage>)currentPage;
+
 - (id)window;
 
+- (id <STDocumentData>)documentData;
+
+- (void)setSelectedLayers: (NSArray *)layers;
+
 @end
+
+
