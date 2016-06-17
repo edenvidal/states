@@ -210,8 +210,6 @@
 	newPage.pageDelegate = currentPage.pageDelegate;
 	newPage.grid = currentPage.grid;
 	newPage.layout = currentPage.layout;
-	newPage.scrollOrigin = currentPage.scrollOrigin;
-	newPage.zoomValue = currentPage.zoomValue;
 
 	// 2) for each selected state we create a "snapshot" artboard and copy it to this new page
 	NSArray *artboards = [selectedStates st_map: ^id<STArtboard>(STStateDescription *state) {
@@ -231,6 +229,10 @@
 
 	// 3) Insert this new page into the document
 	[[[STSketch currentDocument] documentData] addPage: newPage];
+	// 3.1) adjust scroll and zoom to match the source page
+	newPage.scrollOrigin = currentPage.scrollOrigin;
+	newPage.zoomValue = currentPage.zoomValue;
+	// 3.2) mark this new page as current
 	[STSketch currentDocument].currentPage = newPage;
 
 	// 4) Select the first available artboard on a new page

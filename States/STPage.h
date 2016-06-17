@@ -35,8 +35,8 @@
 - (void)setLayout: (id)layout;
 - (id)layout;
 
-- (void)setScrollOrigin: (id)scrollOrigin;
-- (id)scrollOrigin;
+- (void)setScrollOrigin: (CGPoint)scrollOrigin;
+- (CGPoint)scrollOrigin;
 
 - (void)setZoomValue: (CGFloat)zoomValue;
 - (CGFloat)zoomValue;
