@@ -19,7 +19,7 @@
 	snapshotInternal.name = state.title;
 
 	STStatefulArtboard *snapshot = [[STStatefulArtboard alloc] initWithArtboard: snapshotInternal
-																		context: self.context];
+                                                                        context: self.context];
 
 	[snapshot applyState: state];
 	[snapshot removeAllStates];
