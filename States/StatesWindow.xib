@@ -64,10 +64,10 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dNP-7B-gk9" customClass="STUpdateButton">
-                                                            <rect key="frame" x="178" y="6" width="12" height="12"/>
+                                                            <rect key="frame" x="175" y="3" width="18" height="18"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="12" id="fdz-Jt-1Bm"/>
-                                                                <constraint firstAttribute="width" constant="12" id="qma-Em-KlE"/>
+                                                                <constraint firstAttribute="height" constant="18" id="fdz-Jt-1Bm"/>
+                                                                <constraint firstAttribute="width" constant="18" id="qma-Em-KlE"/>
                                                             </constraints>
                                                             <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="dirty" imagePosition="overlaps" alignment="center" state="on" inset="2" id="qRB-58-GY4">
                                                                 <behavior key="behavior" lightByContents="YES"/>
@@ -80,7 +80,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="CCU-9b-be0" secondAttribute="trailing" constant="10" id="X45-p6-dfd"/>
                                                         <constraint firstItem="CCU-9b-be0" firstAttribute="centerY" secondItem="Ayr-wq-u12" secondAttribute="centerY" id="fcY-uv-GVj"/>
                                                         <constraint firstItem="CCU-9b-be0" firstAttribute="leading" secondItem="Ayr-wq-u12" secondAttribute="leading" constant="15" id="wp3-cE-vYB"/>
-                                                        <constraint firstAttribute="trailing" secondItem="dNP-7B-gk9" secondAttribute="trailing" constant="8" id="yfV-py-4GB"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dNP-7B-gk9" secondAttribute="trailing" constant="5" id="yfV-py-4GB"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="textField" destination="CCU-9b-be0" id="jwf-IV-Cmi"/>
