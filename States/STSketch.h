@@ -36,4 +36,7 @@
 + (void)setPluginContextDictionary: (NSDictionary *)contextDictionary;
 + (STSketchPluginContext *)pluginContext;
 
+/// Toggles the plugin's menu item's titles between "Show States" and "Hide States"
++ (void)toggleStatesPluginName;
+
 @end

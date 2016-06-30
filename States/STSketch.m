@@ -70,6 +70,21 @@
 
 #pragma mark -
 
++ (void)toggleStatesPluginName
+{
+    NSMenu *pluginsMenu = [[NSApp menu] itemWithTitle: @"Plugins"].submenu;
+    NSMenuItem *currentStatesItem = nil;
+    if ((currentStatesItem = [pluginsMenu itemWithTitle: @"Show States"])) {
+        currentStatesItem.title = @"Hide States";
+    } else if ((currentStatesItem = [pluginsMenu itemWithTitle: @"Hide States"])) {
+		currentStatesItem.title = @"Show States";
+    } else {
+        NSAssert(currentStatesItem, @"Could not find States plugin menu item inside Plugins menu");
+    }
+}
+
+#pragma mark -
+
 /// Inject ourselves into Sketch internals to receive notifications about artboard selection
 /// and document changes
 - (void)injectIntoMSDocument

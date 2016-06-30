@@ -19,4 +19,5 @@ function showStatesWindow(context)
 	} else {
 		[controller showWindow: nil];
 	}
+    [STSketch toggleStatesPluginName];
 }
