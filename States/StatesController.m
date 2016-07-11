@@ -209,7 +209,10 @@
 	NSAssert(newPage != nil, @"+[MSPage page] returned nil. Is this method still available?");
 
 	newPage.name = [self pageNameForStates: selectedStates sourcePage: currentPage];
-	newPage.pageDelegate = currentPage.pageDelegate;
+	// XXX: MSPage's pageDelegate property doesn't exist since 3.9
+    if ([newPage respondsToSelector: @selector(pageDelegate)]) {
+		newPage.pageDelegate = currentPage.pageDelegate;
+    }
 	newPage.grid = currentPage.grid;
 	newPage.layout = currentPage.layout;
 
