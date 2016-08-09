@@ -1,0 +1,11 @@
+//
+//  Release.xcconfig
+//  States
+//
+//  Created by Dmitry Rodionov on 09/08/16.
+//  Copyright © 2016 Internals Exposed. All rights reserved.
+//
+
+#include "Versioning.xcconfig"
+
+OTHER_LDFLAGS = $(inherited) -Wl,-source_version -Wl,${IEXP_SOURCE_VERSION}
