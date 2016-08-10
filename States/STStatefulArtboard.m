@@ -194,6 +194,10 @@
 	// Modify a states registry
 	[stateRegistry replaceObjectAtIndex: idx withObject: newState.dictionaryRepresentation];
 	[self setArtboardStatesData: stateRegistry];
+    // What if we rename the default state?
+    if ([oldState isEqual: self.defaultState]) {
+        [self updateDefaultState: newState];
+    }
 	// Also update the current state if needed
 	if ([oldState isEqual: self.currentState]) {
 		[self setCurrentState: newState];
@@ -259,4 +263,11 @@
 	NSDictionary *stateDictionary = [defaultState dictionaryRepresentation];
 	[self setArtboardDefaultStateData: stateDictionary];
 }
+
+- (void)updateDefaultState: (STStateDescription *)defaultState
+{
+    NSDictionary *stateDictionary = [defaultState dictionaryRepresentation];
+    [self setArtboardDefaultStateData: stateDictionary];
+}
+
 @end
