@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0A12AE5E1D13A62300CBB026 /* STStatefulArtboard+Snapshots.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A12AE5D1D13A62300CBB026 /* STStatefulArtboard+Snapshots.m */; };
-		0A291EA91D59BF6E0003F2A3 /* Versioning.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0A291EA81D59BF6E0003F2A3 /* Versioning.xcconfig */; };
 		0A2C50EA1D09C87800CB3C9F /* STWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2C50E91D09C87800CB3C9F /* STWindow.m */; };
 		0A3CBDB31D0A61C40016EFD8 /* STTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CBDB21D0A61C40016EFD8 /* STTableRowView.m */; };
 		0A3CBDB61D0A6BB10016EFD8 /* STColorFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A3CBDB51D0A6BB10016EFD8 /* STColorFactory.m */; };
@@ -349,7 +348,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A291EA91D59BF6E0003F2A3 /* Versioning.xcconfig in Resources */,
 				0A9BE3C71D06F89E00257F99 /* dirty@2x.png in Resources */,
 				0A9BE3C61D06F89E00257F99 /* dirty.png in Resources */,
 				0AD7BE0B1CFDF088003C77BB /* StatesWindow.xib in Resources */,
