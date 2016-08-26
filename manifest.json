@@ -3,7 +3,7 @@
 	"description": "Create different artboard states and switch between them easily",
 	"author": "Eden Vidal",
 	"homepage": "http://edenvidal.com",
-	"version": 1.0.0,
+	"version": "1.0.0",
 	"identifier": "com.edenvidal.states-for-sketch",
 	"compatibleVersion": 3,
 	"bundleVersion": 1,
